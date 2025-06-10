@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import Image from 'next/image';
 
 const tabs = [
   { name: 'Personal Insurance', icon: '🛡️' },
@@ -243,7 +244,7 @@ export default function InsuranceTabs() {
                 {tabContent[activeTab].image && (
                   <div className="mt-8">
                     <div className="relative rounded-lg overflow-hidden aspect-video bg-gray-100">
-                      <img
+                      <Image
                         src={tabContent[activeTab].image}
                         alt={tabContent[activeTab].title}
                         className="absolute inset-0 w-full h-full object-cover"
