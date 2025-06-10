@@ -1,0 +1,426 @@
+"use client";
+import { useState } from 'react';
+import Footer from "../components/Footer";
+import Navbar from "../components/Navbar";
+
+export default function Home() {
+  const [activeTab, setActiveTab] = useState('coverage');
+  const [expandedExclusion, setExpandedExclusion] = useState(null);
+
+  const toggleExclusion = (index) => {
+    setExpandedExclusion(expandedExclusion === index ? null : index);
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
+      <Navbar />
+
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-16">
+        {/* Hero Section with animated gradient */}
+        <section className="relative overflow-hidden rounded-2xl shadow-2xl">
+          <div className="absolute inset-0 bg-gradient-to-r from-green-600 to-green-800 animate-gradient-x"></div>
+          <div className="relative z-10 py-20 px-6 text-center">
+            <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight animate-fade-in">
+              Industrial Property Insurance
+            </h1>
+            <div className="max-w-2xl mx-auto">
+              <p className="text-xl text-green-100 opacity-90 animate-fade-in-up">
+                {/* Comprehensive protection for your watercraft with tailored coverage options */}
+              </p>
+            </div>
+          </div>
+          <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-gray-50 to-transparent"></div>
+        </section>
+
+        {/* What is Pleasure Hull insurance? */}
+        <section className="grid md:grid-cols-2 gap-8">
+          <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 transform transition-all hover:scale-[1.01] hover:shadow-xl">
+            <h2 className="text-3xl font-bold text-green-700 mb-6">
+               What is Industrial Property insurance?
+
+            </h2>
+            <div className="space-y-6 text-gray-700 text-lg leading-relaxed">
+              <p>Industrial Risks Insurance Policy covers industrial units against accidental loss or damage to the plant, machinery, stock and building as well against any loss that arises from consequential business interruption because of the said damage.</p>
+              {/* <p>Material damage insurance is part of a business insurance solution that covers physical assets such as buildings, contents, equipment, fit-out, and stock against accidental loss or damage caused by events like fire or theft. The policy includes indemnity and replacement cover and may also cover theft and fraud. It's essential for businesses to safeguard their physical assets and protect against unforeseen financial loss</p> */}
+            </div>
+          </div>
+
+          <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 transform transition-all hover:scale-[1.01] hover:shadow-xl">
+            <h2 className="text-3xl font-bold text-green-700 mb-6">
+              What you should consider?
+            </h2>
+            <div className="space-y-6 text-gray-700 text-lg leading-relaxed">
+               <p>Irrespective of whether a business owns the space or rents the premises for its operations, disasters can happen. Unforeseen damage can happen due to fire, floods Furthermore, a liability could arise due to accidental injuries to employees or customers in the premises.</p>
+               <p>We, at FG insurance, can provide customised covers to protect your business against a range of possible problems and the potential costs.</p>
+            </div>
+          </div>
+        </section>
+
+        {/* Stats Section with animated counters */}
+        <section className="space-y-12">
+          <h2 className="text-3xl font-bold text-green-700 text-center">
+            Did you know?
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Stat 1 */}
+            <div className="bg-white border border-green-100 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group">
+              <div className="text-green-600 text-5xl font-bold mb-4 animate-counter" data-target="1030">
+               {/* 239,015,033 */}
+              </div>
+              <p className="text-gray-600 mb-4">
+              Manufacturing sales in New Zealand increased 1.5 percent year-on-year during the last quarter of 2019.
+              </p>
+              <div className="mt-4 px-4 py-2 bg-green-50 rounded-lg inline-block group-hover:bg-green-100 transition-colors">
+               
+              </div>
+            </div>
+
+            {/* Stat 2 */}
+            <div className="bg-white border border-green-100 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group">
+              <div className="text-green-600 text-5xl font-bold mb-4">
+              {/* 52.36% */}
+              </div>
+              <p className="text-gray-600 mb-4">
+       Food processing, textiles, machinery and transportation equipment, finance, tourism, mining are the main industries of New Zealand.</p>
+              <div className="mt-4 px-4 py-2 bg-green-50 rounded-lg inline-block group-hover:bg-green-100 transition-colors">
+                <p className="text-sm font-medium text-green-700 italic">
+                    {/* (Insurance council of New Zealand 2019) */}
+                </p>
+              </div>
+            </div>
+
+            {/* Stat 3 */}
+
+            <div className="bg-white border border-green-100 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group">
+              <div className="text-green-600 text-5xl font-bold mb-4">
+              {/* 52.36% */}
+              </div>
+              <p className="text-gray-600 mb-4">
+       New Zealand’s Industrial Production Index data was reported at 106.622 2010=100 in 2017.</p>
+              <div className="mt-4 px-4 py-2 bg-green-50 rounded-lg inline-block group-hover:bg-green-100 transition-colors">
+                <p className="text-sm font-medium text-green-700 italic">
+                    {/* (Insurance council of New Zealand 2019) */}
+                </p>
+              </div>
+            </div>
+           
+          </div>
+        </section>
+
+        {/* Coverage Types with tabs */}
+         {/* Coverage Types with modern cards */}
+<section className="space-y-12">
+  <div className="bg-gradient-to-br from-green-50 to-white p-10 rounded-3xl shadow-xl">
+    <h2 className="text-4xl font-bold text-green-800 mb-12 text-center">
+       What are the types of covers available?
+    </h2>
+    
+    <div className="grid md:grid-cols-3 gap-8">
+      {/* First-Party Coverage */}
+      <div className="bg-white p-8 rounded-2xl shadow-md border border-green-100 hover:border-green-300 transition-all duration-300 hover:-translate-y-2 group relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-400 to-green-600"></div>
+        <div className="flex flex-col h-full">
+          <div className="bg-green-100/80 w-14 h-14 rounded-xl flex items-center justify-center mb-6 group-hover:bg-green-200 transition-colors">
+            <svg className="h-7 w-7 text-green-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+          </div>
+          <h3 className="text-2xl font-bold text-gray-900 mb-4">Material Damage </h3>
+          <ul className="space-y-3 text-gray-700 flex-grow">
+            <li className="flex items-start">
+              <div className="bg-green-100 p-0.5 rounded-full mr-3 mt-1">
+                <svg className="h-4 w-4 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+               <span> It covers accidental physical loss or damage (including machinery breakdown) to the insured property, due to any cause other than those excluded.</span>
+            </li>
+           
+          </ul>
+          
+        </div>
+      </div>
+
+      {/* Crisis Management */}
+      <div className="bg-white p-8 rounded-2xl shadow-md border border-green-100 hover:border-green-300 transition-all duration-300 hover:-translate-y-2 group relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-400 to-green-600"></div>
+        <div className="flex flex-col h-full">
+          <div className="bg-green-100/80 w-14 h-14 rounded-xl flex items-center justify-center mb-6 group-hover:bg-green-200 transition-colors">
+            <svg className="h-7 w-7 text-green-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z" />
+            </svg>
+          </div>
+          <h3 className="text-2xl font-bold text-gray-900 mb-4">Business Interruption</h3>
+          <ul className="space-y-3 text-gray-700 flex-grow">
+            <li className="flex items-start">
+              <div className="bg-green-100 p-0.5 rounded-full mr-3 mt-1">
+                <svg className="h-4 w-4 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+        <span>It covers loss due to business interruption following a physical loss or damage to the property. The insured party can opt to include cover against loss of profits arising out of machinery breakdown.</span>
+            </li>
+            
+          </ul>
+           
+        </div>
+      </div>
+
+      {/* Third-Party Liability */}
+        <div className="bg-white p-8 rounded-2xl shadow-md border border-green-100 hover:border-green-300 transition-all duration-300 hover:-translate-y-2 group relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-400 to-green-600"></div>
+        <div className="flex flex-col h-full">
+          <div className="bg-green-100/80 w-14 h-14 rounded-xl flex items-center justify-center mb-6 group-hover:bg-green-200 transition-colors">
+            <svg className="h-7 w-7 text-green-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z" />
+            </svg>
+          </div>
+          <h3 className="text-2xl font-bold text-gray-900 mb-4">Comprehensive Cover</h3>
+          <ul className="space-y-3 text-gray-700 flex-grow">
+            <li className="flex items-start">
+              <div className="bg-green-100 p-0.5 rounded-full mr-3 mt-1">
+                <svg className="h-4 w-4 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+        <span>Suitable for large sized, diverse businesses.
+</span>
+            </li>
+            
+          </ul>
+           
+        </div>
+      </div>
+
+       
+    </div>
+
+   
+  </div>
+</section>
+
+        {/* Coverage Details with interactive tabs */}
+        <section className="space-y-12">
+          <div className="bg-white p-10 rounded-2xl shadow-lg">
+            <h2 className="text-3xl font-bold text-green-700 mb-8">
+              What can it cover?
+
+            </h2>
+            <p className="text-gray-700 text-lg mb-8">
+    Some of the benefits an industrial risk insurance policy may include:
+            </p>
+
+            <div className="grid md:grid-cols-2 gap-8">
+              <ul className="space-y-5">
+                <li className="flex items-start">
+                  <div className="bg-green-100 p-1 rounded-full mr-4 mt-1">
+                    <svg className="h-5 w-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <span className="text-gray-700 text-lg">
+
+
+Cover for loss or damage to physical business assets.
+ </span>
+                </li>
+                <li className="flex items-start">
+                  <div className="bg-green-100 p-1 rounded-full mr-4 mt-1">
+                    <svg className="h-5 w-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <span className="text-gray-700 text-lg">Optional cover for architects, surveyors and consulting engineers fee clause, designation of property, escalation, omission to insure additions, alterations or extensions, temporary removal of stocks etc.</span>
+                </li>
+                <li className="flex items-start">
+                  <div className="bg-green-100 p-1 rounded-full mr-4 mt-1">
+                    <svg className="h-5 w-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <span className="text-gray-700 text-lg"> Cover against damage from fire, floods, thefts or even accidents to employees or customers in the building.</span>
+                </li>
+                <li className="flex items-start">
+                  <div className="bg-green-100 p-1 rounded-full mr-4 mt-1">
+                    <svg className="h-5 w-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <span className="text-gray-700 text-lg"> 	Protection for material items of the business, such as buildings, contents, stock, plant and machinery.</span>
+                </li>
+              </ul>
+              <ul className="space-y-5">
+                <li className="flex items-start">
+                  <div className="bg-green-100 p-1 rounded-full mr-4 mt-1">
+                    <svg className="h-5 w-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <span className="text-gray-700 text-lg">Optional cover for suppliers' and customers premises extension. </span>
+                </li>
+
+                  <li className="flex items-start">
+                  <div className="bg-green-100 p-1 rounded-full mr-4 mt-1">
+                    <svg className="h-5 w-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <span className="text-gray-700 text-lg">Cover against loss from consequential business interruption. </span>
+</li>
+                  
+             
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        {/* Exclusions and Case Study */}
+        <section className="grid md:grid-cols-2 gap-8">
+          {/* Exclusions with accordion */}
+          <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-200">
+            <h2 className="text-3xl font-bold text-green-700 mb-8">
+               What usually is not covered?
+
+            </h2>
+             
+            <div className="space-y-3">
+              {[ 
+                "Interruption of the water supply, gas, electricity or fuel systems or failure of the effluent disposal systems",
+                "Collapse or cracking of buildings",
+                "Coastal or river erosion",
+                "Willful act or gross negligence of the insured",
+                "Cessation of work, delay",
+                "War, warlike operations",
+                "Nuclear risks",
+                "The destruction of property by order of any public authority"
+
+              ].map((exclusion, index) => (
+      <div key={index} className="flex items-start">
+        <div className="bg-red-100 p-1 rounded-full mr-4 mt-1">
+          <svg className="h-5 w-5 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </div>
+        <span className="text-gray-700">
+          {exclusion}
+        </span>
+      </div>
+    ))}
+            </div>
+          </div>
+
+          {/* Case Study with animation */}
+          <div className="relative overflow-hidden rounded-2xl shadow-lg">
+            <div className="absolute inset-0 bg-gradient-to-br from-green-600 to-green-800"></div>
+            <div className="relative p-8 text-white">
+              <h2 className="text-3xl font-bold mb-8">
+                CASE STUDY
+              </h2>
+              <div className="space-y-6 text-green-50 text-lg leading-relaxed">
+              <p>Mr. Kumar lives in Cambridge and owns a business involving sale, distribution, installation and maintenance of refrigeration & air conditioning solutions.</p>
+              <p>One day, someone cut through the boundary fence to gain entrance to their industrial unit. Consequently, Mr. Kumar suffered losses due to breakage of containers, theft of items therein, theft of tools, damage to vehicles and theft of scrap metal.</p>
+<p>Fortunately, since Mr. Kumar had adequate industrial insurance, he was able to recover the cost of total loss as well as all material damages and costs of repairs.</p>
+            </div>
+          </div>
+            </div>
+        </section>
+
+        {/* Why Choose FG Insurance with animation */}
+        <section className="bg-white p-10 rounded-2xl shadow-lg transform transition-all hover:scale-[1.005]">
+          <div className="max-w-5xl mx-auto">
+            <h2 className="text-3xl font-bold text-green-700 mb-8">
+              Why choose FG Insurance?
+            </h2>
+            <ul className="grid md:grid-cols-2 gap-6">
+              <li className="flex items-start">
+                <div className="bg-green-100 p-2 rounded-lg mr-4">
+                  <svg className="h-6 w-6 text-green-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                  </svg>
+                </div>
+                <span className="text-gray-700 text-lg">Peace of Mind at Affordable Rates</span>
+              </li>
+              <li className="flex items-start">
+                <div className="bg-green-100 p-2 rounded-lg mr-4">
+                  <svg className="h-6 w-6 text-green-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
+                  </svg>
+                </div>
+                <span className="text-gray-700 text-lg">Flexible Plans</span>
+              </li>
+              <li className="flex items-start">
+                <div className="bg-green-100 p-2 rounded-lg mr-4">
+                  <svg className="h-6 w-6 text-green-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7l4-4m0 0l4 4m-4-4v18m-7-4v4m0 0H5m2 0h2m5 4a8 8 0 01-8-8 4 4 0 014-4h8a4 4 0 014 4 8 8 0 01-8 8z" />
+                  </svg>
+                </div>
+                <span className="text-gray-700 text-lg">24/7 Roadside Assistance</span>
+              </li>
+              <li className="flex items-start">
+                <div className="bg-green-100 p-2 rounded-lg mr-4">
+                  <svg className="h-6 w-6 text-green-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                  </svg>
+                </div>
+                <span className="text-gray-700 text-lg">Fast and Simple Claim Service - online or by phone</span>
+              </li>
+
+               <li className="flex items-start">
+                <div className="bg-green-100 p-2 rounded-lg mr-4">
+                  <svg className="h-6 w-6 text-green-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                  </svg>
+                </div>
+                <span className="text-gray-700 text-lg">Modern Policy Wordings</span>
+              </li>
+
+              <li className="flex items-start">
+                <div className="bg-green-100 p-2 rounded-lg mr-4">
+                  <svg className="h-6 w-6 text-green-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                  </svg>
+                </div>
+                <span className="text-gray-700 text-lg">Competitive Pricing</span>
+              </li>
+            </ul>   
+
+              
+          </div>
+        </section>
+      </main>
+
+      <Footer />
+
+      <style jsx global>{`
+        @keyframes gradient {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+        .animate-gradient-x {
+          background-size: 200% 200%;
+          animation: gradient 8s ease infinite;
+        }
+        .animate-fade-in {
+          animation: fadeIn 1s ease-out;
+        }
+        .animate-fade-in-up {
+          animation: fadeInUp 1s ease-out;
+        }
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        @keyframes fadeInUp {
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-counter {
+          transition: all 1s ease-out;
+        }
+      `}</style>
+    </div>
+  );
+}
