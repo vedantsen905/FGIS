@@ -236,7 +236,7 @@ export default function Home() {
                  "Pregnancy-related issues may not be included",
                  "Traveling against medical advice is not covered",
                  "You may have to pay an excess, and there are coverage limits"
-              ]. .map((exclusion, index) => (
+              ].map((exclusion, index) => (
       <div key={index} className="flex items-start">
         <div className="bg-red-100 p-1 rounded-full mr-4 mt-1">
           <svg className="h-5 w-5 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
