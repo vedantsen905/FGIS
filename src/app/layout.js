@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 
  export const metadata = {
   title: 'FGIS',
-  description: 'Your website description',
+  description: 'Welcome to FG LIFE INSURANCE',
 };
 
 export default function RootLayout({ children }) {
