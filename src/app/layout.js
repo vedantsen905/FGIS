@@ -1,4 +1,5 @@
 import { Geist, Geist_Mono } from "next/font/google";
+import { Oxanium } from "next/font/google";
 import "./globals.css";
 import GoogleTranslate from "./components/GoogleTranslate";
 
@@ -12,21 +13,33 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
- export const metadata = {
-  title: 'FGIS',
-  description: 'Welcome to FG LIFE INSURANCE',
+const oxanium = Oxanium({
+  variable: "--font-oxanium",
+  subsets: ["latin"],
+});
+
+export const metadata = {
+  title: "FGIS",
+  description: "Welcome to FG LIFE INSURANCE",
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-         <link rel="icon" href="/favicon.png" />
+        {/* Favicon (will be shown in browser tab) */}
+        <link rel="icon" href="/favicon.png" />
+
+        {/* Title (text shown beside favicon in tab) */}
+        <title>FGIS - FG Life Insurance</title>
+
+        {/* Meta Description */}
+        <meta name="description" content="Welcome to FG LIFE INSURANCE" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${oxanium.variable} antialiased`}
       >
-        <GoogleTranslate />
+        {/* <GoogleTranslate /> */}
         {children}
       </body>
     </html>

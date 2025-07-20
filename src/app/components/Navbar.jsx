@@ -33,8 +33,7 @@ export default function Navbar() {
       
       // Close dropdowns when scrolling
       if (Math.abs(currentScrollY - lastScrollY) > 10) {
-        setActiveDropdown(null);
-        setActiveSubmenu(null);
+        closeAllMenus();
       }
       
       setLastScrollY(currentScrollY);
@@ -43,7 +42,6 @@ export default function Navbar() {
     const handleClickOutside = (event) => {
       if (navbarRef.current && !navbarRef.current.contains(event.target)) {
         closeAllMenus();
-        setActiveLink(null);
       }
     };
 
@@ -83,6 +81,18 @@ export default function Navbar() {
   const handleLinkClick = (linkName) => {
     setActiveLink(linkName);
     closeAllMenus();
+  };
+
+  const isLinkActive = (linkName) => {
+    return activeLink === linkName;
+  };
+
+  const isDropdownActive = (dropdownName) => {
+    return activeDropdown === dropdownName;
+  };
+
+  const isSubmenuActive = (submenuName) => {
+    return activeSubmenu === submenuName;
   };
 
   const PersonalInsuranceItems = [
@@ -147,13 +157,13 @@ export default function Navbar() {
             <Link 
               href="/" 
               className={`relative transition-colors duration-300 font-medium text-[15px] group ${
-                activeLink === 'home' ? 'text-[#00AB9D]' : 'text-gray-800 hover:text-[#00AB9D]'
+                isLinkActive('home') ? 'text-[#00AB9D]' : 'text-gray-800 hover:text-[#00AB9D]'
               }`}
               onClick={() => handleLinkClick('home')}
             >
               Home
               <span className={`absolute bottom-0 left-0 h-0.5 bg-[#00AB9D] transition-all duration-300 ${
-                activeLink === 'home' ? 'w-full' : 'w-0 group-hover:w-full'
+                isLinkActive('home') ? 'w-full' : 'w-0 group-hover:w-full'
               }`}></span>
             </Link>
 
@@ -165,28 +175,27 @@ export default function Navbar() {
                   handleLinkClick('insurance');
                 }}
                 className={`flex items-center transition-colors duration-300 font-medium text-[15px] group ${
-                  activeLink === 'insurance' ? 'text-[#00AB9D]' : 'text-gray-800 hover:text-[#00AB9D]'
+                  isLinkActive('insurance') ? 'text-[#00AB9D]' : 'text-gray-800 hover:text-[#00AB9D]'
                 }`}
               >
                 Insurance Products
                 <FiChevronDown className={`ml-1.5 transition-transform duration-200 ${
-                  activeDropdown === "insurance" ? "rotate-180 text-[#00AB9D]" : 
-                  activeLink === 'insurance' ? "text-[#00AB9D]" : "text-gray-500 group-hover:text-[#00AB9D]"
+                  isDropdownActive("insurance") ? "rotate-180 text-[#00AB9D]" : 
+                  isLinkActive('insurance') ? "text-[#00AB9D]" : "text-gray-500 group-hover:text-[#00AB9D]"
                 }`} />
                 <span className={`absolute bottom-0 left-0 h-0.5 bg-[#00AB9D] transition-all duration-300 ${
-                  activeLink === 'insurance' ? 'w-full' : 'w-0 group-hover:w-full'
+                  isLinkActive('insurance') ? 'w-full' : 'w-0 group-hover:w-full'
                 }`}></span>
               </button>
 
               {/* Dropdown that shows on hover or when active */}
               <div 
                 className={`absolute bg-white top-full left-0 shadow-xl rounded-lg py-3 px-1 w-64 z-50 space-y-1 border border-gray-100 mt-1 transition-all duration-200 ${
-                  activeDropdown === "insurance" ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'
+                  isDropdownActive("insurance") ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'
                 } group-hover:opacity-100 group-hover:visible group-hover:translate-y-0`}
                 onMouseLeave={() => {
-                  if (activeDropdown !== "insurance") {
-                    setActiveDropdown(null);
-                    setActiveSubmenu(null);
+                  if (!isDropdownActive("insurance")) {
+                    closeAllMenus();
                   }
                 }}
               >
@@ -196,15 +205,15 @@ export default function Navbar() {
                     className="flex justify-between items-center px-4 py-2.5 hover:bg-[#00AB9D]/10 rounded-lg cursor-pointer transition-all duration-200 group"
                   >
                     <span className={`font-medium text-gray-800 ${
-                      activeSubmenu === "Personal" ? 'text-[#00AB9D]' : 'group-hover:text-[#00AB9D]'
+                      isSubmenuActive("Personal") ? 'text-[#00AB9D]' : 'group-hover:text-[#00AB9D]'
                     }`}>Personal Insurance</span>
                     <FiChevronRight className={`ml-2 transition-transform duration-200 ${
-                      activeSubmenu === "Personal" ? "rotate-90 text-[#00AB9D]" : "text-gray-500 group-hover:text-[#00AB9D]"
+                      isSubmenuActive("Personal") ? "rotate-90 text-[#00AB9D]" : "text-gray-500 group-hover:text-[#00AB9D]"
                     }`} />
                   </div>
                   <div 
                     className={`absolute left-full top-0 bg-white p-2 w-64 shadow-lg rounded-lg border border-gray-100 z-50 transition-all duration-200 ${
-                      activeSubmenu === "Personal" ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'
+                      isSubmenuActive("Personal") ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'
                     } group-hover/submenu:opacity-100 group-hover/submenu:visible group-hover/submenu:translate-y-0`}
                   >
                     {PersonalInsuranceItems.map((item) => (
@@ -227,15 +236,15 @@ export default function Navbar() {
                     className="flex justify-between items-center px-4 py-2.5 hover:bg-[#00AB9D]/10 rounded-lg cursor-pointer transition-all duration-200 group"
                   >
                     <span className={`font-medium text-gray-800 ${
-                      activeSubmenu === "business" ? 'text-[#00AB9D]' : 'group-hover:text-[#00AB9D]'
+                      isSubmenuActive("business") ? 'text-[#00AB9D]' : 'group-hover:text-[#00AB9D]'
                     }`}>Business Insurance</span>
                     <FiChevronRight className={`ml-2 transition-transform duration-200 ${
-                      activeSubmenu === "business" ? "rotate-90 text-[#00AB9D]" : "text-gray-500 group-hover:text-[#00AB9D]"
+                      isSubmenuActive("business") ? "rotate-90 text-[#00AB9D]" : "text-gray-500 group-hover:text-[#00AB9D]"
                     }`} />
                   </div>
                   <div 
                     className={`absolute left-full top-0 bg-white p-2 w-64 shadow-lg rounded-lg border border-gray-100 z-50 transition-all duration-200 ${
-                      activeSubmenu === "business" ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'
+                      isSubmenuActive("business") ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'
                     } group-hover/submenu:opacity-100 group-hover/submenu:visible group-hover/submenu:translate-y-0`}
                   >
                     {businessInsuranceItems.map((item) => (
@@ -258,15 +267,15 @@ export default function Navbar() {
                     className="flex justify-between items-center px-4 py-2.5 hover:bg-[#00AB9D]/10 rounded-lg cursor-pointer transition-all duration-200 group"
                   >
                     <span className={`font-medium text-gray-800 ${
-                      activeSubmenu === "specialist" ? 'text-[#00AB9D]' : 'group-hover:text-[#00AB9D]'
+                      isSubmenuActive("specialist") ? 'text-[#00AB9D]' : 'group-hover:text-[#00AB9D]'
                     }`}>Specialist Insurance</span>
                     <FiChevronRight className={`ml-2 transition-transform duration-200 ${
-                      activeSubmenu === "specialist" ? "rotate-90 text-[#00AB9D]" : "text-gray-500 group-hover:text-[#00AB9D]"
+                      isSubmenuActive("specialist") ? "rotate-90 text-[#00AB9D]" : "text-gray-500 group-hover:text-[#00AB9D]"
                     }`} />
                   </div>
                   <div 
                     className={`absolute left-full top-0 bg-white p-2 w-64 shadow-lg rounded-lg border border-gray-100 z-50 transition-all duration-200 ${
-                      activeSubmenu === "specialist" ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'
+                      isSubmenuActive("specialist") ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'
                     } group-hover/submenu:opacity-100 group-hover/submenu:visible group-hover/submenu:translate-y-0`}
                   >
                     {SpecailistInusrance.map((item) => (
@@ -301,26 +310,26 @@ export default function Navbar() {
                   handleLinkClick('info');
                 }}
                 className={`flex items-center transition-colors duration-300 font-medium text-[15px] group ${
-                  activeLink === 'info' ? 'text-[#00AB9D]' : 'text-gray-800 hover:text-[#00AB9D]'
+                  isLinkActive('info') ? 'text-[#00AB9D]' : 'text-gray-800 hover:text-[#00AB9D]'
                 }`}
               >
                 Important Information
                 <FiChevronDown className={`ml-1.5 transition-transform duration-200 ${
-                  activeDropdown === "info" ? "rotate-180 text-[#00AB9D]" : 
-                  activeLink === 'info' ? "text-[#00AB9D]" : "text-gray-500 group-hover:text-[#00AB9D]"
+                  isDropdownActive("info") ? "rotate-180 text-[#00AB9D]" : 
+                  isLinkActive('info') ? "text-[#00AB9D]" : "text-gray-500 group-hover:text-[#00AB9D]"
                 }`} />  
                 <span className={`absolute bottom-0 left-0 h-0.5 bg-[#00AB9D] transition-all duration-300 ${
-                  activeLink === 'info' ? 'w-full' : 'w-0 group-hover:w-full'
+                  isLinkActive('info') ? 'w-full' : 'w-0 group-hover:w-full'
                 }`}></span>
               </button>
 
               <div 
                 className={`absolute bg-white top-full left-0 shadow-xl rounded-lg py-3 px-1 w-64 z-50 border border-gray-100 mt-1 transition-all duration-200 ${
-                  activeDropdown === "info" ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'
+                  isDropdownActive("info") ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'
                 } group-hover:opacity-100 group-hover:visible group-hover:translate-y-0`}
                 onMouseLeave={() => {
-                  if (activeDropdown !== "info") {
-                    setActiveDropdown(null);
+                  if (!isDropdownActive("info")) {
+                    closeAllMenus();
                   }
                 }}
               >
@@ -340,26 +349,26 @@ export default function Navbar() {
             <Link 
               href="/claim" 
               className={`relative transition-colors duration-300 font-medium text-[15px] group ${
-                activeLink === 'claim' ? 'text-[#00AB9D]' : 'text-gray-800 hover:text-[#00AB9D]'
+                isLinkActive('claim') ? 'text-[#00AB9D]' : 'text-gray-800 hover:text-[#00AB9D]'
               }`}
               onClick={() => handleLinkClick('claim')}
             >
               Claims
               <span className={`absolute bottom-0 left-0 h-0.5 bg-[#00AB9D] transition-all duration-300 ${
-                activeLink === 'claim' ? 'w-full' : 'w-0 group-hover:w-full'
+                isLinkActive('claim') ? 'w-full' : 'w-0 group-hover:w-full'
               }`}></span>
             </Link>
             
             <Link 
               href="/resources" 
               className={`relative transition-colors duration-300 font-medium text-[15px] group ${
-                activeLink === 'resources' ? 'text-[#00AB9D]' : 'text-gray-800 hover:text-[#00AB9D]'
+                isLinkActive('resources') ? 'text-[#00AB9D]' : 'text-gray-800 hover:text-[#00AB9D]'
               }`}
               onClick={() => handleLinkClick('resources')}
             >
               Resources
               <span className={`absolute bottom-0 left-0 h-0.5 bg-[#00AB9D] transition-all duration-300 ${
-                activeLink === 'resources' ? 'w-full' : 'w-0 group-hover:w-full'
+                isLinkActive('resources') ? 'w-full' : 'w-0 group-hover:w-full'
               }`}></span>
             </Link>
 
@@ -397,7 +406,7 @@ export default function Navbar() {
             <Link 
               href="/" 
               className={`block px-5 py-3 rounded-lg transition-all duration-300 font-medium hover:pl-6 text-[15px] ${
-                activeLink === 'home' ? 'text-[#00AB9D] bg-[#00AB9D]/10' : 'text-gray-800 hover:bg-[#00AB9D]/10'
+                isLinkActive('home') ? 'text-[#00AB9D] bg-[#00AB9D]/10' : 'text-gray-800 hover:bg-[#00AB9D]/10'
               }`}
               onClick={() => handleLinkClick('home')}
             >
@@ -409,38 +418,38 @@ export default function Navbar() {
               <button
                 onClick={() => toggleDropdown("insurance-mobile")}
                 className={`flex justify-between items-center w-full px-5 py-3 rounded-lg transition-all duration-300 font-medium hover:pl-6 text-[15px] ${
-                  activeLink === 'insurance' ? 'text-[#00AB9D] bg-[#00AB9D]/10' : 'text-gray-800 hover:bg-[#00AB9D]/10'
+                  isLinkActive('insurance') ? 'text-[#00AB9D] bg-[#00AB9D]/10' : 'text-gray-800 hover:bg-[#00AB9D]/10'
                 }`}
               >
                 <span>Insurance Products</span>
                 <FiChevronDown className={`ml-1 transition-transform duration-200 ${
-                  activeDropdown === "insurance-mobile" ? "rotate-180 text-[#00AB9D]" : "text-gray-500"
+                  isDropdownActive("insurance-mobile") ? "rotate-180 text-[#00AB9D]" : "text-gray-500"
                 }`} />
               </button>
 
-              {activeDropdown === "insurance-mobile" && (
+              {isDropdownActive("insurance-mobile") && (
                 <div className="pl-6 mt-1 space-y-1 animate-fadeIn">
                   {/* Personal Insurance */}
                   <div className="relative">
                     <button
                       onClick={() => toggleSubmenu("Personal-mobile")}
                       className={`flex justify-between items-center w-full px-5 py-2.5 rounded-lg transition-all duration-300 hover:pl-6 text-sm ${
-                        activeSubmenu === "Personal-mobile" ? 'text-[#00AB9D] bg-[#00AB9D]/10' : 'text-gray-700 hover:bg-[#00AB9D]/10'
+                        isSubmenuActive("Personal-mobile") ? 'text-[#00AB9D] bg-[#00AB9D]/10' : 'text-gray-700 hover:bg-[#00AB9D]/10'
                       }`}
                     >
                       <span>Personal Insurance</span>
                       <FiChevronRight className={`ml-1 transition-transform duration-200 ${
-                        activeSubmenu === "Personal-mobile" ? "rotate-90 text-[#00AB9D]" : "text-gray-500"
+                        isSubmenuActive("Personal-mobile") ? "rotate-90 text-[#00AB9D]" : "text-gray-500"
                       }`} />
                     </button>
-                    {activeSubmenu === "Personal-mobile" && (
+                    {isSubmenuActive("Personal-mobile") && (
                       <div className="pl-6 mt-1 space-y-1 animate-fadeIn">
                         {PersonalInsuranceItems.map((item) => (
                           <Link 
                             key={item.label} 
                             href={item.href} 
                             className={`block px-5 py-2.5 rounded-lg transition-all duration-300 hover:pl-6 text-sm ${
-                              activeLink === item.label ? 'text-[#00AB9D] bg-[#00AB9D]/10' : 'text-gray-600 hover:bg-[#00AB9D]/10'
+                              isLinkActive(item.label) ? 'text-[#00AB9D] bg-[#00AB9D]/10' : 'text-gray-600 hover:bg-[#00AB9D]/10'
                             }`}
                             onClick={() => handleLinkClick(item.label)}
                           >
@@ -456,22 +465,22 @@ export default function Navbar() {
                     <button
                       onClick={() => toggleSubmenu("business-mobile")}
                       className={`flex justify-between items-center w-full px-5 py-2.5 rounded-lg transition-all duration-300 hover:pl-6 text-sm ${
-                        activeSubmenu === "business-mobile" ? 'text-[#00AB9D] bg-[#00AB9D]/10' : 'text-gray-700 hover:bg-[#00AB9D]/10'
+                        isSubmenuActive("business-mobile") ? 'text-[#00AB9D] bg-[#00AB9D]/10' : 'text-gray-700 hover:bg-[#00AB9D]/10'
                       }`}
                     >
                       <span>Business Insurance</span>
                       <FiChevronRight className={`ml-1 transition-transform duration-200 ${
-                        activeSubmenu === "business-mobile" ? "rotate-90 text-[#00AB9D]" : "text-gray-500"
+                        isSubmenuActive("business-mobile") ? "rotate-90 text-[#00AB9D]" : "text-gray-500"
                       }`} />
                     </button>
-                    {activeSubmenu === "business-mobile" && (
+                    {isSubmenuActive("business-mobile") && (
                       <div className="pl-6 mt-1 space-y-1 animate-fadeIn">
                         {businessInsuranceItems.map((item) => (
                           <Link 
                             key={item.label} 
                             href={item.href} 
                             className={`block px-5 py-2.5 rounded-lg transition-all duration-300 hover:pl-6 text-sm ${
-                              activeLink === item.label ? 'text-[#00AB9D] bg-[#00AB9D]/10' : 'text-gray-600 hover:bg-[#00AB9D]/10'
+                              isLinkActive(item.label) ? 'text-[#00AB9D] bg-[#00AB9D]/10' : 'text-gray-600 hover:bg-[#00AB9D]/10'
                             }`}
                             onClick={() => handleLinkClick(item.label)}
                           >
@@ -487,22 +496,22 @@ export default function Navbar() {
                     <button
                       onClick={() => toggleSubmenu("specialist-mobile")}
                       className={`flex justify-between items-center w-full px-5 py-2.5 rounded-lg transition-all duration-300 hover:pl-6 text-sm ${
-                        activeSubmenu === "specialist-mobile" ? 'text-[#00AB9D] bg-[#00AB9D]/10' : 'text-gray-700 hover:bg-[#00AB9D]/10'
+                        isSubmenuActive("specialist-mobile") ? 'text-[#00AB9D] bg-[#00AB9D]/10' : 'text-gray-700 hover:bg-[#00AB9D]/10'
                       }`}
                     >
                       <span>Specialist Insurance</span>
                       <FiChevronRight className={`ml-1 transition-transform duration-200 ${
-                        activeSubmenu === "specialist-mobile" ? "rotate-90 text-[#00AB9D]" : "text-gray-500"
+                        isSubmenuActive("specialist-mobile") ? "rotate-90 text-[#00AB9D]" : "text-gray-500"
                       }`} />
                     </button>
-                    {activeSubmenu === "specialist-mobile" && (
+                    {isSubmenuActive("specialist-mobile") && (
                       <div className="pl-6 mt-1 space-y-1 animate-fadeIn">
                         {SpecailistInusrance.map((item) => (
                           <Link 
                             key={item.label} 
                             href={item.href} 
                             className={`block px-5 py-2.5 rounded-lg transition-all duration-300 hover:pl-6 text-sm ${
-                              activeLink === item.label ? 'text-[#00AB9D] bg-[#00AB9D]/10' : 'text-gray-600 hover:bg-[#00AB9D]/10'
+                              isLinkActive(item.label) ? 'text-[#00AB9D] bg-[#00AB9D]/10' : 'text-gray-600 hover:bg-[#00AB9D]/10'
                             }`}
                             onClick={() => handleLinkClick(item.label)}
                           >
@@ -517,7 +526,7 @@ export default function Navbar() {
                   <Link 
                     href="/rural" 
                     className={`block px-5 py-2.5 rounded-lg transition-all duration-300 hover:pl-6 text-sm ${
-                      activeLink === 'rural' ? 'text-[#00AB9D] bg-[#00AB9D]/10' : 'text-gray-700 hover:bg-[#00AB9D]/10'
+                      isLinkActive('rural') ? 'text-[#00AB9D] bg-[#00AB9D]/10' : 'text-gray-700 hover:bg-[#00AB9D]/10'
                     }`}
                     onClick={() => handleLinkClick('rural')}
                   >
@@ -532,23 +541,23 @@ export default function Navbar() {
               <button
                 onClick={() => toggleDropdown("info-mobile")}
                 className={`flex justify-between items-center w-full px-5 py-3 rounded-lg transition-all duration-300 font-medium hover:pl-6 text-[15px] ${
-                  activeLink === 'info' ? 'text-[#00AB9D] bg-[#00AB9D]/10' : 'text-gray-800 hover:bg-[#00AB9D]/10'
+                  isLinkActive('info') ? 'text-[#00AB9D] bg-[#00AB9D]/10' : 'text-gray-800 hover:bg-[#00AB9D]/10'
                 }`}
               >
                 <span>Important Information</span>
                 <FiChevronDown className={`ml-1 transition-transform duration-200 ${
-                  activeDropdown === "info-mobile" ? "rotate-180 text-[#00AB9D]" : "text-gray-500"
+                  isDropdownActive("info-mobile") ? "rotate-180 text-[#00AB9D]" : "text-gray-500"
                 }`} />
               </button>
 
-              {activeDropdown === "info-mobile" && (
+              {isDropdownActive("info-mobile") && (
                 <div className="pl-6 mt-1 space-y-1 animate-fadeIn">
                   {importantInfoItems.map((item) => (
                     <Link 
                       key={item.label} 
                       href={item.href} 
                       className={`block px-5 py-2.5 rounded-lg transition-all duration-300 hover:pl-6 text-sm ${
-                        activeLink === item.label ? 'text-[#00AB9D] bg-[#00AB9D]/10' : 'text-gray-600 hover:bg-[#00AB9D]/10'
+                        isLinkActive(item.label) ? 'text-[#00AB9D] bg-[#00AB9D]/10' : 'text-gray-600 hover:bg-[#00AB9D]/10'
                       }`}
                       onClick={() => handleLinkClick(item.label)}
                     >
@@ -562,7 +571,7 @@ export default function Navbar() {
             <Link 
               href="/claim" 
               className={`block px-5 py-3 rounded-lg transition-all duration-300 font-medium hover:pl-6 text-[15px] ${
-                activeLink === 'claim' ? 'text-[#00AB9D] bg-[#00AB9D]/10' : 'text-gray-800 hover:bg-[#00AB9D]/10'
+                isLinkActive('claim') ? 'text-[#00AB9D] bg-[#00AB9D]/10' : 'text-gray-800 hover:bg-[#00AB9D]/10'
               }`}
               onClick={() => handleLinkClick('claim')}
             >
@@ -571,7 +580,7 @@ export default function Navbar() {
             <Link 
               href="/resources" 
               className={`block px-5 py-3 rounded-lg transition-all duration-300 font-medium hover:pl-6 text-[15px] ${
-                activeLink === 'resources' ? 'text-[#00AB9D] bg-[#00AB9D]/10' : 'text-gray-800 hover:bg-[#00AB9D]/10'
+                isLinkActive('resources') ? 'text-[#00AB9D] bg-[#00AB9D]/10' : 'text-gray-800 hover:bg-[#00AB9D]/10'
               }`}
               onClick={() => handleLinkClick('resources')}
             >
@@ -581,7 +590,7 @@ export default function Navbar() {
             <Link href="/contact">
               <button 
                 className={`relative w-full px-5 py-3 rounded-lg transition-all duration-300 font-medium shadow-md mt-2 text-[15px] overflow-hidden group ${
-                  activeLink === 'contact' ? 'bg-[#008fa0]' : 'bg-[#00AB9D] hover:bg-[#008fa0]'
+                  isLinkActive('contact') ? 'bg-[#008fa0]' : 'bg-[#00AB9D] hover:bg-[#008fa0]'
                 }`}
                 onClick={() => handleLinkClick('contact')}
               >
