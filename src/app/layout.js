@@ -19,7 +19,7 @@ const oxanium = Oxanium({
 });
 
 export const metadata = {
-  title: "FGIS",
+  title: "FGIS - FG Life Insurance",
   description: "Welcome to FG LIFE INSURANCE",
 };
 
