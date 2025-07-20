@@ -81,7 +81,7 @@ export default function InsurancePartners() {
     <div className="min-h-screen flex flex-col bg-gray-50">
       <Navbar />
       
-      <main className="flex-grow pt-24 pb-12 px-4 sm:px-6 lg:px-8">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-16">
         <div className="max-w-7xl mx-auto">
           {/* Header */}
           <div className="text-center mb-12">

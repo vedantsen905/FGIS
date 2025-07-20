@@ -12,6 +12,7 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [visible, setVisible] = useState(true);
+  const [activeLink, setActiveLink] = useState(null);
   const navbarRef = useRef(null);
 
   useEffect(() => {
@@ -39,23 +40,49 @@ export default function Navbar() {
       setLastScrollY(currentScrollY);
     };
 
+    const handleClickOutside = (event) => {
+      if (navbarRef.current && !navbarRef.current.contains(event.target)) {
+        closeAllMenus();
+        setActiveLink(null);
+      }
+    };
+
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    document.addEventListener("mousedown", handleClickOutside);
+    
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
   }, [lastScrollY]);
 
   const toggleDropdown = (menu) => {
-    setActiveDropdown(activeDropdown === menu ? null : menu);
-    setActiveSubmenu(null);
+    if (activeDropdown === menu) {
+      setActiveDropdown(null);
+      setActiveSubmenu(null);
+    } else {
+      setActiveDropdown(menu);
+      setActiveSubmenu(null);
+    }
   };
 
   const toggleSubmenu = (submenu) => {
-    setActiveSubmenu(activeSubmenu === submenu ? null : submenu);
+    if (activeSubmenu === submenu) {
+      setActiveSubmenu(null);
+    } else {
+      setActiveSubmenu(submenu);
+    }
   };
 
   const closeAllMenus = () => {
     setActiveDropdown(null);
     setActiveSubmenu(null);
     setMobileMenuOpen(false);
+  };
+
+  const handleLinkClick = (linkName) => {
+    setActiveLink(linkName);
+    closeAllMenus();
   };
 
   const PersonalInsuranceItems = [
@@ -83,7 +110,7 @@ export default function Navbar() {
 
   const importantInfoItems = [
     { label: "About Us", href: "/about" },
-    { label: "Product Disclosure Statements", href: "/productdisclosurestatements" },
+    { label: "Public Disclosure Statement", href: "/productdisclosurestatements" },
     { label: "Privacy Policy", href: "/privacypolicy" },
     { label: "Terms of Business", href: "/termsofbusiness" },
     { label: "Our Partners", href: "/our-partners" },
@@ -93,15 +120,18 @@ export default function Navbar() {
   return (
     <nav 
       ref={navbarRef}
-      className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? "bg-white shadow-lg" : "bg-white backdrop-blur-sm bg-opacity-90"} ${
-        visible ? "translate-y-0" : "-translate-y-full"
+      className={`bg-white sticky top-0 z-50 transition-transform duration-300 ${visible ? 'translate-y-0' : '-translate-y-full'} ${
+        isScrolled ? 'shadow-md' : 'shadow-none'
       }`}
-      style={{ transition: "transform 0.3s ease-in-out" }}
     >
       <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-24">
           {/* Logo */}
-          <Link href="/" className="flex-shrink-0 flex items-center" onClick={closeAllMenus}>
+          <Link 
+            href="/" 
+            className="flex-shrink-0 flex items-center" 
+            onClick={() => handleLinkClick('home')}
+          >
             <Image
               src="/logo.png"
               alt="Company Logo"
@@ -116,158 +146,230 @@ export default function Navbar() {
           <div className="hidden lg:flex items-center space-x-8">
             <Link 
               href="/" 
-              className="relative text-gray-800 hover:text-emerald-600 transition-colors duration-300 font-medium text-[15px] group"
-              onClick={closeAllMenus}
+              className={`relative transition-colors duration-300 font-medium text-[15px] group ${
+                activeLink === 'home' ? 'text-[#00AB9D]' : 'text-gray-800 hover:text-[#00AB9D]'
+              }`}
+              onClick={() => handleLinkClick('home')}
             >
               Home
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-emerald-500 transition-all duration-300 group-hover:w-full"></span>
+              <span className={`absolute bottom-0 left-0 h-0.5 bg-[#00AB9D] transition-all duration-300 ${
+                activeLink === 'home' ? 'w-full' : 'w-0 group-hover:w-full'
+              }`}></span>
             </Link>
 
             {/* Insurance Products Dropdown */}
-            <div className="relative">
+            <div className="relative group">
               <button
-                onClick={() => toggleDropdown("insurance")}
-                className={`flex items-center text-gray-800 hover:text-emerald-600 transition-colors duration-300 font-medium text-[15px] group ${activeDropdown === "insurance" ? "text-emerald-600" : ""}`}
+                onClick={() => {
+                  toggleDropdown("insurance");
+                  handleLinkClick('insurance');
+                }}
+                className={`flex items-center transition-colors duration-300 font-medium text-[15px] group ${
+                  activeLink === 'insurance' ? 'text-[#00AB9D]' : 'text-gray-800 hover:text-[#00AB9D]'
+                }`}
               >
                 Insurance Products
-                <FiChevronDown className={`ml-1.5 transition-transform duration-200 ${activeDropdown === "insurance" ? "rotate-180 text-emerald-600" : "text-gray-500 group-hover:text-emerald-600"}`} />
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-emerald-500 transition-all duration-300 group-hover:w-full"></span>
+                <FiChevronDown className={`ml-1.5 transition-transform duration-200 ${
+                  activeDropdown === "insurance" ? "rotate-180 text-[#00AB9D]" : 
+                  activeLink === 'insurance' ? "text-[#00AB9D]" : "text-gray-500 group-hover:text-[#00AB9D]"
+                }`} />
+                <span className={`absolute bottom-0 left-0 h-0.5 bg-[#00AB9D] transition-all duration-300 ${
+                  activeLink === 'insurance' ? 'w-full' : 'w-0 group-hover:w-full'
+                }`}></span>
               </button>
 
-              {activeDropdown === "insurance" && (
-                <div className="absolute bg-gradient-to-b from-white to-emerald-50 top-full left-0 shadow-xl rounded-lg py-3 px-1 w-64 z-50 space-y-1 border border-gray-100 animate-fadeIn mt-1">
-                  <div className="relative">
-                    <div
-                      onClick={() => toggleSubmenu("Personal")}
-                      className="flex justify-between items-center px-4 py-2.5 hover:bg-emerald-100/50 rounded-lg cursor-pointer transition-all duration-200 group"
-                    >
-                      <span className="font-medium text-gray-800 group-hover:text-emerald-600">Personal Insurance</span>
-                      <FiChevronRight className={`ml-2 transition-transform duration-200 ${activeSubmenu === "Personal" ? "rotate-90 text-emerald-600" : "text-gray-500 group-hover:text-emerald-600"}`} />
-                    </div>
-                    {activeSubmenu === "Personal" && (
-                      <div className="absolute left-full top-0 bg-gradient-to-b from-white to-emerald-50 p-2 w-64 shadow-lg rounded-lg border border-gray-100 z-50 animate-fadeIn">
-                        {PersonalInsuranceItems.map((item) => (
-                          <Link 
-                            key={item.label} 
-                            href={item.href} 
-                            className="block px-4 py-2.5 hover:bg-emerald-100/50 rounded-lg transition-all duration-200 text-gray-700 hover:text-emerald-600 hover:pl-5 text-sm hover:font-medium"
-                          >
-                            {item.label}
-                          </Link>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Business Insurance Submenu */}
-                  <div className="relative">
-                    <div
-                      onClick={() => toggleSubmenu("business")}
-                      className="flex justify-between items-center px-4 py-2.5 hover:bg-emerald-100/50 rounded-lg cursor-pointer transition-all duration-200 group"
-                    >
-                      <span className="font-medium text-gray-800 group-hover:text-emerald-600">Business Insurance</span>
-                      <FiChevronRight className={`ml-2 transition-transform duration-200 ${activeSubmenu === "business" ? "rotate-90 text-emerald-600" : "text-gray-500 group-hover:text-emerald-600"}`} />
-                    </div>
-                    {activeSubmenu === "business" && (
-                      <div className="absolute left-full top-0 bg-gradient-to-b from-white to-emerald-50 p-2 w-64 shadow-lg rounded-lg border border-gray-100 z-50 animate-fadeIn">
-                        {businessInsuranceItems.map((item) => (
-                          <Link 
-                            key={item.label} 
-                            href={item.href} 
-                            className="block px-4 py-2.5 hover:bg-emerald-100/50 rounded-lg transition-all duration-200 text-gray-700 hover:text-emerald-600 hover:pl-5 text-sm hover:font-medium"
-                          >
-                            {item.label}
-                          </Link>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Specialist Insurance Submenu */}
-                  <div className="relative">
-                    <div
-                      onClick={() => toggleSubmenu("specialist")}
-                      className="flex justify-between items-center px-4 py-2.5 hover:bg-emerald-100/50 rounded-lg cursor-pointer transition-all duration-200 group"
-                    >
-                      <span className="font-medium text-gray-800 group-hover:text-emerald-600">Specialist Insurance</span>
-                      <FiChevronRight className={`ml-2 transition-transform duration-200 ${activeSubmenu === "specialist" ? "rotate-90 text-emerald-600" : "text-gray-500 group-hover:text-emerald-600"}`} />
-                    </div>
-                    {activeSubmenu === "specialist" && (
-                      <div className="absolute left-full top-0 bg-gradient-to-b from-white to-emerald-50 p-2 w-64 shadow-lg rounded-lg border border-gray-100 z-50 animate-fadeIn">
-                        {SpecailistInusrance.map((item) => (
-                          <Link 
-                            key={item.label} 
-                            href={item.href} 
-                            className="block px-4 py-2.5 hover:bg-emerald-100/50 rounded-lg transition-all duration-200 text-gray-700 hover:text-emerald-600 hover:pl-5 text-sm hover:font-medium"
-                          >
-                            {item.label}
-                          </Link>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Rural Insurance */}
-                  <Link 
-                    href="/rural" 
-                    className="block px-4 py-2.5 hover:bg-emerald-100/50 rounded-lg transition-all duration-200 text-gray-700 hover:text-emerald-600 hover:pl-5 hover:font-medium"
+              {/* Dropdown that shows on hover or when active */}
+              <div 
+                className={`absolute bg-white top-full left-0 shadow-xl rounded-lg py-3 px-1 w-64 z-50 space-y-1 border border-gray-100 mt-1 transition-all duration-200 ${
+                  activeDropdown === "insurance" ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'
+                } group-hover:opacity-100 group-hover:visible group-hover:translate-y-0`}
+                onMouseLeave={() => {
+                  if (activeDropdown !== "insurance") {
+                    setActiveDropdown(null);
+                    setActiveSubmenu(null);
+                  }
+                }}
+              >
+                <div className="relative group/submenu">
+                  <div
+                    onClick={() => toggleSubmenu("Personal")}
+                    className="flex justify-between items-center px-4 py-2.5 hover:bg-[#00AB9D]/10 rounded-lg cursor-pointer transition-all duration-200 group"
                   >
-                    Rural Insurance
-                  </Link>
+                    <span className={`font-medium text-gray-800 ${
+                      activeSubmenu === "Personal" ? 'text-[#00AB9D]' : 'group-hover:text-[#00AB9D]'
+                    }`}>Personal Insurance</span>
+                    <FiChevronRight className={`ml-2 transition-transform duration-200 ${
+                      activeSubmenu === "Personal" ? "rotate-90 text-[#00AB9D]" : "text-gray-500 group-hover:text-[#00AB9D]"
+                    }`} />
+                  </div>
+                  <div 
+                    className={`absolute left-full top-0 bg-white p-2 w-64 shadow-lg rounded-lg border border-gray-100 z-50 transition-all duration-200 ${
+                      activeSubmenu === "Personal" ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'
+                    } group-hover/submenu:opacity-100 group-hover/submenu:visible group-hover/submenu:translate-y-0`}
+                  >
+                    {PersonalInsuranceItems.map((item) => (
+                      <Link 
+                        key={item.label} 
+                        href={item.href} 
+                        className="block px-4 py-2.5 hover:bg-[#00AB9D]/10 rounded-lg transition-all duration-200 text-gray-700 hover:text-[#00AB9D] hover:pl-5 text-sm hover:font-medium"
+                        onClick={() => handleLinkClick(item.label)}
+                      >
+                        {item.label}
+                      </Link>
+                    ))}
+                  </div>
                 </div>
-              )}
+
+                {/* Business Insurance Submenu */}
+                <div className="relative group/submenu">
+                  <div
+                    onClick={() => toggleSubmenu("business")}
+                    className="flex justify-between items-center px-4 py-2.5 hover:bg-[#00AB9D]/10 rounded-lg cursor-pointer transition-all duration-200 group"
+                  >
+                    <span className={`font-medium text-gray-800 ${
+                      activeSubmenu === "business" ? 'text-[#00AB9D]' : 'group-hover:text-[#00AB9D]'
+                    }`}>Business Insurance</span>
+                    <FiChevronRight className={`ml-2 transition-transform duration-200 ${
+                      activeSubmenu === "business" ? "rotate-90 text-[#00AB9D]" : "text-gray-500 group-hover:text-[#00AB9D]"
+                    }`} />
+                  </div>
+                  <div 
+                    className={`absolute left-full top-0 bg-white p-2 w-64 shadow-lg rounded-lg border border-gray-100 z-50 transition-all duration-200 ${
+                      activeSubmenu === "business" ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'
+                    } group-hover/submenu:opacity-100 group-hover/submenu:visible group-hover/submenu:translate-y-0`}
+                  >
+                    {businessInsuranceItems.map((item) => (
+                      <Link 
+                        key={item.label} 
+                        href={item.href} 
+                        className="block px-4 py-2.5 hover:bg-[#00AB9D]/10 rounded-lg transition-all duration-200 text-gray-700 hover:text-[#00AB9D] hover:pl-5 text-sm hover:font-medium"
+                        onClick={() => handleLinkClick(item.label)}
+                      >
+                        {item.label}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Specialist Insurance Submenu */}
+                <div className="relative group/submenu">
+                  <div
+                    onClick={() => toggleSubmenu("specialist")}
+                    className="flex justify-between items-center px-4 py-2.5 hover:bg-[#00AB9D]/10 rounded-lg cursor-pointer transition-all duration-200 group"
+                  >
+                    <span className={`font-medium text-gray-800 ${
+                      activeSubmenu === "specialist" ? 'text-[#00AB9D]' : 'group-hover:text-[#00AB9D]'
+                    }`}>Specialist Insurance</span>
+                    <FiChevronRight className={`ml-2 transition-transform duration-200 ${
+                      activeSubmenu === "specialist" ? "rotate-90 text-[#00AB9D]" : "text-gray-500 group-hover:text-[#00AB9D]"
+                    }`} />
+                  </div>
+                  <div 
+                    className={`absolute left-full top-0 bg-white p-2 w-64 shadow-lg rounded-lg border border-gray-100 z-50 transition-all duration-200 ${
+                      activeSubmenu === "specialist" ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'
+                    } group-hover/submenu:opacity-100 group-hover/submenu:visible group-hover/submenu:translate-y-0`}
+                  >
+                    {SpecailistInusrance.map((item) => (
+                      <Link 
+                        key={item.label} 
+                        href={item.href} 
+                        className="block px-4 py-2.5 hover:bg-[#00AB9D]/10 rounded-lg transition-all duration-200 text-gray-700 hover:text-[#00AB9D] hover:pl-5 text-sm hover:font-medium"
+                        onClick={() => handleLinkClick(item.label)}
+                      >
+                        {item.label}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Rural Insurance */}
+                <Link 
+                  href="/rural" 
+                  className="block px-4 py-2.5 hover:bg-[#00AB9D]/10 rounded-lg transition-all duration-200 text-gray-700 hover:text-[#00AB9D] hover:pl-5 hover:font-medium"
+                  onClick={() => handleLinkClick('rural')}
+                >
+                  Rural Insurance
+                </Link>
+              </div>
             </div>
 
             {/* Important Information Dropdown */}
-            <div className="relative">
+            <div className="relative group">
               <button
-                onClick={() => toggleDropdown("info")}
-                className={`flex items-center text-gray-800 hover:text-emerald-600 transition-colors duration-300 font-medium text-[15px] group ${activeDropdown === "info" ? "text-emerald-600" : ""}`}
+                onClick={() => {
+                  toggleDropdown("info");
+                  handleLinkClick('info');
+                }}
+                className={`flex items-center transition-colors duration-300 font-medium text-[15px] group ${
+                  activeLink === 'info' ? 'text-[#00AB9D]' : 'text-gray-800 hover:text-[#00AB9D]'
+                }`}
               >
                 Important Information
-                <FiChevronDown className={`ml-1.5 transition-transform duration-200 ${activeDropdown === "info" ? "rotate-180 text-emerald-600" : "text-gray-500 group-hover:text-emerald-600"}`} />
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-emerald-500 transition-all duration-300 group-hover:w-full"></span>
+                <FiChevronDown className={`ml-1.5 transition-transform duration-200 ${
+                  activeDropdown === "info" ? "rotate-180 text-[#00AB9D]" : 
+                  activeLink === 'info' ? "text-[#00AB9D]" : "text-gray-500 group-hover:text-[#00AB9D]"
+                }`} />  
+                <span className={`absolute bottom-0 left-0 h-0.5 bg-[#00AB9D] transition-all duration-300 ${
+                  activeLink === 'info' ? 'w-full' : 'w-0 group-hover:w-full'
+                }`}></span>
               </button>
 
-              {activeDropdown === "info" && (
-                <div className="absolute bg-gradient-to-b from-white to-emerald-50 top-full left-0 shadow-xl rounded-lg py-3 px-1 w-64 z-50 border border-gray-100 animate-fadeIn mt-1">
-                  {importantInfoItems.map((item) => (
-                    <Link 
-                      key={item.label} 
-                      href={item.href} 
-                      className="block px-4 py-2.5 hover:bg-emerald-100/50 rounded-lg transition-all duration-200 text-gray-700 hover:text-emerald-600 hover:pl-5 text-sm hover:font-medium"
-                    >
-                      {item.label}
-                    </Link>
-                  ))}
-                </div>
-              )}
+              <div 
+                className={`absolute bg-white top-full left-0 shadow-xl rounded-lg py-3 px-1 w-64 z-50 border border-gray-100 mt-1 transition-all duration-200 ${
+                  activeDropdown === "info" ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'
+                } group-hover:opacity-100 group-hover:visible group-hover:translate-y-0`}
+                onMouseLeave={() => {
+                  if (activeDropdown !== "info") {
+                    setActiveDropdown(null);
+                  }
+                }}
+              >
+                {importantInfoItems.map((item) => (
+                  <Link 
+                    key={item.label} 
+                    href={item.href} 
+                    className="block px-4 py-2.5 hover:bg-[#00AB9D]/10 rounded-lg transition-all duration-200 text-gray-700 hover:text-[#00AB9D] hover:pl-5 text-sm hover:font-medium"
+                    onClick={() => handleLinkClick(item.label)}
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
             </div>
 
             <Link 
               href="/claim" 
-              className="relative text-gray-800 hover:text-emerald-600 transition-colors duration-300 font-medium text-[15px] group"
-              onClick={closeAllMenus}
+              className={`relative transition-colors duration-300 font-medium text-[15px] group ${
+                activeLink === 'claim' ? 'text-[#00AB9D]' : 'text-gray-800 hover:text-[#00AB9D]'
+              }`}
+              onClick={() => handleLinkClick('claim')}
             >
               Claims
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-emerald-500 transition-all duration-300 group-hover:w-full"></span>
+              <span className={`absolute bottom-0 left-0 h-0.5 bg-[#00AB9D] transition-all duration-300 ${
+                activeLink === 'claim' ? 'w-full' : 'w-0 group-hover:w-full'
+              }`}></span>
             </Link>
+            
             <Link 
               href="/resources" 
-              className="relative text-gray-800 hover:text-emerald-600 transition-colors duration-300 font-medium text-[15px] group"
-              onClick={closeAllMenus}
+              className={`relative transition-colors duration-300 font-medium text-[15px] group ${
+                activeLink === 'resources' ? 'text-[#00AB9D]' : 'text-gray-800 hover:text-[#00AB9D]'
+              }`}
+              onClick={() => handleLinkClick('resources')}
             >
               Resources
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-emerald-500 transition-all duration-300 group-hover:w-full"></span>
+              <span className={`absolute bottom-0 left-0 h-0.5 bg-[#00AB9D] transition-all duration-300 ${
+                activeLink === 'resources' ? 'w-full' : 'w-0 group-hover:w-full'
+              }`}></span>
             </Link>
 
             <Link href="/contact">
               <button 
-                className="relative bg-gradient-to-r from-emerald-500 to-emerald-600 text-white px-5 py-2.5 rounded-lg hover:from-emerald-600 hover:to-emerald-700 transition-all duration-300 font-medium shadow-md hover:shadow-lg transform hover:-translate-y-0.5 text-[15px] overflow-hidden group"
-                onClick={closeAllMenus}
+                className="relative bg-[#00AB9D] text-white px-5 py-2.5 rounded-lg hover:bg-[#008fa0] transition-all duration-300 font-medium shadow-md hover:shadow-lg transform hover:-translate-y-0.5 text-[15px] overflow-hidden group"
+                onClick={() => handleLinkClick('contact')}
               >
                 <span className="relative z-10">Contact Us</span>
-                <span className="absolute inset-0 bg-gradient-to-r from-emerald-600 to-emerald-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"></span>
+                <span className="absolute inset-0 bg-[#008fa0] opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"></span>
               </button>
             </Link>
           </div>
@@ -276,7 +378,7 @@ export default function Navbar() {
           <div className="lg:hidden flex items-center">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="text-gray-700 hover:text-emerald-600 focus:outline-none transition-colors duration-300 p-2 -mr-2"
+              className="text-gray-700 hover:text-[#00AB9D] focus:outline-none transition-colors duration-300 p-2 -mr-2"
             >
               {mobileMenuOpen ? (
                 <FiX className="h-7 w-7" />
@@ -290,12 +392,14 @@ export default function Navbar() {
 
       {/* Mobile Navigation */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-gradient-to-b from-white to-emerald-50 shadow-xl animate-slideDown">
+        <div className="lg:hidden bg-white shadow-xl animate-slideDown">
           <div className="px-5 pt-2 pb-6 space-y-1">
             <Link 
               href="/" 
-              className="block px-5 py-3 text-gray-800 hover:bg-emerald-100/50 rounded-lg transition-all duration-300 font-medium hover:pl-6 text-[15px]"
-              onClick={closeAllMenus}
+              className={`block px-5 py-3 rounded-lg transition-all duration-300 font-medium hover:pl-6 text-[15px] ${
+                activeLink === 'home' ? 'text-[#00AB9D] bg-[#00AB9D]/10' : 'text-gray-800 hover:bg-[#00AB9D]/10'
+              }`}
+              onClick={() => handleLinkClick('home')}
             >
               Home
             </Link>
@@ -304,10 +408,14 @@ export default function Navbar() {
             <div className="relative">
               <button
                 onClick={() => toggleDropdown("insurance-mobile")}
-                className="flex justify-between items-center w-full px-5 py-3 text-gray-800 hover:bg-emerald-100/50 rounded-lg transition-all duration-300 font-medium hover:pl-6 text-[15px]"
+                className={`flex justify-between items-center w-full px-5 py-3 rounded-lg transition-all duration-300 font-medium hover:pl-6 text-[15px] ${
+                  activeLink === 'insurance' ? 'text-[#00AB9D] bg-[#00AB9D]/10' : 'text-gray-800 hover:bg-[#00AB9D]/10'
+                }`}
               >
                 <span>Insurance Products</span>
-                <FiChevronDown className={`ml-1 transition-transform duration-200 ${activeDropdown === "insurance-mobile" ? "rotate-180 text-emerald-600" : "text-gray-500"}`} />
+                <FiChevronDown className={`ml-1 transition-transform duration-200 ${
+                  activeDropdown === "insurance-mobile" ? "rotate-180 text-[#00AB9D]" : "text-gray-500"
+                }`} />
               </button>
 
               {activeDropdown === "insurance-mobile" && (
@@ -316,10 +424,14 @@ export default function Navbar() {
                   <div className="relative">
                     <button
                       onClick={() => toggleSubmenu("Personal-mobile")}
-                      className="flex justify-between items-center w-full px-5 py-2.5 text-gray-700 hover:bg-emerald-100/50 rounded-lg transition-all duration-300 hover:pl-6 text-sm"
+                      className={`flex justify-between items-center w-full px-5 py-2.5 rounded-lg transition-all duration-300 hover:pl-6 text-sm ${
+                        activeSubmenu === "Personal-mobile" ? 'text-[#00AB9D] bg-[#00AB9D]/10' : 'text-gray-700 hover:bg-[#00AB9D]/10'
+                      }`}
                     >
                       <span>Personal Insurance</span>
-                      <FiChevronRight className={`ml-1 transition-transform duration-200 ${activeSubmenu === "Personal-mobile" ? "rotate-90 text-emerald-600" : "text-gray-500"}`} />
+                      <FiChevronRight className={`ml-1 transition-transform duration-200 ${
+                        activeSubmenu === "Personal-mobile" ? "rotate-90 text-[#00AB9D]" : "text-gray-500"
+                      }`} />
                     </button>
                     {activeSubmenu === "Personal-mobile" && (
                       <div className="pl-6 mt-1 space-y-1 animate-fadeIn">
@@ -327,8 +439,10 @@ export default function Navbar() {
                           <Link 
                             key={item.label} 
                             href={item.href} 
-                            className="block px-5 py-2.5 text-gray-600 hover:bg-emerald-100/50 rounded-lg transition-all duration-300 hover:pl-6 text-sm hover:font-medium"
-                            onClick={closeAllMenus}
+                            className={`block px-5 py-2.5 rounded-lg transition-all duration-300 hover:pl-6 text-sm ${
+                              activeLink === item.label ? 'text-[#00AB9D] bg-[#00AB9D]/10' : 'text-gray-600 hover:bg-[#00AB9D]/10'
+                            }`}
+                            onClick={() => handleLinkClick(item.label)}
                           >
                             {item.label}
                           </Link>
@@ -341,10 +455,14 @@ export default function Navbar() {
                   <div className="relative">
                     <button
                       onClick={() => toggleSubmenu("business-mobile")}
-                      className="flex justify-between items-center w-full px-5 py-2.5 text-gray-700 hover:bg-emerald-100/50 rounded-lg transition-all duration-300 hover:pl-6 text-sm"
+                      className={`flex justify-between items-center w-full px-5 py-2.5 rounded-lg transition-all duration-300 hover:pl-6 text-sm ${
+                        activeSubmenu === "business-mobile" ? 'text-[#00AB9D] bg-[#00AB9D]/10' : 'text-gray-700 hover:bg-[#00AB9D]/10'
+                      }`}
                     >
                       <span>Business Insurance</span>
-                      <FiChevronRight className={`ml-1 transition-transform duration-200 ${activeSubmenu === "business-mobile" ? "rotate-90 text-emerald-600" : "text-gray-500"}`} />
+                      <FiChevronRight className={`ml-1 transition-transform duration-200 ${
+                        activeSubmenu === "business-mobile" ? "rotate-90 text-[#00AB9D]" : "text-gray-500"
+                      }`} />
                     </button>
                     {activeSubmenu === "business-mobile" && (
                       <div className="pl-6 mt-1 space-y-1 animate-fadeIn">
@@ -352,8 +470,10 @@ export default function Navbar() {
                           <Link 
                             key={item.label} 
                             href={item.href} 
-                            className="block px-5 py-2.5 text-gray-600 hover:bg-emerald-100/50 rounded-lg transition-all duration-300 hover:pl-6 text-sm hover:font-medium"
-                            onClick={closeAllMenus}
+                            className={`block px-5 py-2.5 rounded-lg transition-all duration-300 hover:pl-6 text-sm ${
+                              activeLink === item.label ? 'text-[#00AB9D] bg-[#00AB9D]/10' : 'text-gray-600 hover:bg-[#00AB9D]/10'
+                            }`}
+                            onClick={() => handleLinkClick(item.label)}
                           >
                             {item.label}
                           </Link>
@@ -366,10 +486,14 @@ export default function Navbar() {
                   <div className="relative">
                     <button
                       onClick={() => toggleSubmenu("specialist-mobile")}
-                      className="flex justify-between items-center w-full px-5 py-2.5 text-gray-700 hover:bg-emerald-100/50 rounded-lg transition-all duration-300 hover:pl-6 text-sm"
+                      className={`flex justify-between items-center w-full px-5 py-2.5 rounded-lg transition-all duration-300 hover:pl-6 text-sm ${
+                        activeSubmenu === "specialist-mobile" ? 'text-[#00AB9D] bg-[#00AB9D]/10' : 'text-gray-700 hover:bg-[#00AB9D]/10'
+                      }`}
                     >
                       <span>Specialist Insurance</span>
-                      <FiChevronRight className={`ml-1 transition-transform duration-200 ${activeSubmenu === "specialist-mobile" ? "rotate-90 text-emerald-600" : "text-gray-500"}`} />
+                      <FiChevronRight className={`ml-1 transition-transform duration-200 ${
+                        activeSubmenu === "specialist-mobile" ? "rotate-90 text-[#00AB9D]" : "text-gray-500"
+                      }`} />
                     </button>
                     {activeSubmenu === "specialist-mobile" && (
                       <div className="pl-6 mt-1 space-y-1 animate-fadeIn">
@@ -377,8 +501,10 @@ export default function Navbar() {
                           <Link 
                             key={item.label} 
                             href={item.href} 
-                            className="block px-5 py-2.5 text-gray-600 hover:bg-emerald-100/50 rounded-lg transition-all duration-300 hover:pl-6 text-sm hover:font-medium"
-                            onClick={closeAllMenus}
+                            className={`block px-5 py-2.5 rounded-lg transition-all duration-300 hover:pl-6 text-sm ${
+                              activeLink === item.label ? 'text-[#00AB9D] bg-[#00AB9D]/10' : 'text-gray-600 hover:bg-[#00AB9D]/10'
+                            }`}
+                            onClick={() => handleLinkClick(item.label)}
                           >
                             {item.label}
                           </Link>
@@ -390,8 +516,10 @@ export default function Navbar() {
                   {/* Rural Insurance */}
                   <Link 
                     href="/rural" 
-                    className="block px-5 py-2.5 text-gray-700 hover:bg-emerald-100/50 rounded-lg transition-all duration-300 hover:pl-6 text-sm hover:font-medium"
-                    onClick={closeAllMenus}
+                    className={`block px-5 py-2.5 rounded-lg transition-all duration-300 hover:pl-6 text-sm ${
+                      activeLink === 'rural' ? 'text-[#00AB9D] bg-[#00AB9D]/10' : 'text-gray-700 hover:bg-[#00AB9D]/10'
+                    }`}
+                    onClick={() => handleLinkClick('rural')}
                   >
                     Rural Insurance
                   </Link>
@@ -403,10 +531,14 @@ export default function Navbar() {
             <div className="relative">
               <button
                 onClick={() => toggleDropdown("info-mobile")}
-                className="flex justify-between items-center w-full px-5 py-3 text-gray-800 hover:bg-emerald-100/50 rounded-lg transition-all duration-300 font-medium hover:pl-6 text-[15px]"
+                className={`flex justify-between items-center w-full px-5 py-3 rounded-lg transition-all duration-300 font-medium hover:pl-6 text-[15px] ${
+                  activeLink === 'info' ? 'text-[#00AB9D] bg-[#00AB9D]/10' : 'text-gray-800 hover:bg-[#00AB9D]/10'
+                }`}
               >
                 <span>Important Information</span>
-                <FiChevronDown className={`ml-1 transition-transform duration-200 ${activeDropdown === "info-mobile" ? "rotate-180 text-emerald-600" : "text-gray-500"}`} />
+                <FiChevronDown className={`ml-1 transition-transform duration-200 ${
+                  activeDropdown === "info-mobile" ? "rotate-180 text-[#00AB9D]" : "text-gray-500"
+                }`} />
               </button>
 
               {activeDropdown === "info-mobile" && (
@@ -415,8 +547,10 @@ export default function Navbar() {
                     <Link 
                       key={item.label} 
                       href={item.href} 
-                      className="block px-5 py-2.5 text-gray-600 hover:bg-emerald-100/50 rounded-lg transition-all duration-300 hover:pl-6 text-sm hover:font-medium"
-                      onClick={closeAllMenus}
+                      className={`block px-5 py-2.5 rounded-lg transition-all duration-300 hover:pl-6 text-sm ${
+                        activeLink === item.label ? 'text-[#00AB9D] bg-[#00AB9D]/10' : 'text-gray-600 hover:bg-[#00AB9D]/10'
+                      }`}
+                      onClick={() => handleLinkClick(item.label)}
                     >
                       {item.label}
                     </Link>
@@ -427,26 +561,32 @@ export default function Navbar() {
 
             <Link 
               href="/claim" 
-              className="block px-5 py-3 text-gray-800 hover:bg-emerald-100/50 rounded-lg transition-all duration-300 font-medium hover:pl-6 text-[15px]"
-              onClick={closeAllMenus}
+              className={`block px-5 py-3 rounded-lg transition-all duration-300 font-medium hover:pl-6 text-[15px] ${
+                activeLink === 'claim' ? 'text-[#00AB9D] bg-[#00AB9D]/10' : 'text-gray-800 hover:bg-[#00AB9D]/10'
+              }`}
+              onClick={() => handleLinkClick('claim')}
             >
               Claims
             </Link>
             <Link 
               href="/resources" 
-              className="block px-5 py-3 text-gray-800 hover:bg-emerald-100/50 rounded-lg transition-all duration-300 font-medium hover:pl-6 text-[15px]"
-              onClick={closeAllMenus}
+              className={`block px-5 py-3 rounded-lg transition-all duration-300 font-medium hover:pl-6 text-[15px] ${
+                activeLink === 'resources' ? 'text-[#00AB9D] bg-[#00AB9D]/10' : 'text-gray-800 hover:bg-[#00AB9D]/10'
+              }`}
+              onClick={() => handleLinkClick('resources')}
             >
               Resources
             </Link>
 
             <Link href="/contact">
               <button 
-                className="relative w-full bg-gradient-to-r from-emerald-500 to-emerald-600 text-white px-5 py-3 rounded-lg hover:from-emerald-600 hover:to-emerald-700 transition-all duration-300 font-medium shadow-md hover:shadow-lg mt-2 text-[15px] overflow-hidden group"
-                onClick={closeAllMenus}
+                className={`relative w-full px-5 py-3 rounded-lg transition-all duration-300 font-medium shadow-md mt-2 text-[15px] overflow-hidden group ${
+                  activeLink === 'contact' ? 'bg-[#008fa0]' : 'bg-[#00AB9D] hover:bg-[#008fa0]'
+                }`}
+                onClick={() => handleLinkClick('contact')}
               >
-                <span className="relative z-10">Contact Us</span>
-                <span className="absolute inset-0 bg-gradient-to-r from-emerald-600 to-emerald-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"></span>
+                <span className="relative z-10 text-white">Contact Us</span>
+                <span className="absolute inset-0 bg-[#008fa0] opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"></span>
               </button>
             </Link>
           </div>

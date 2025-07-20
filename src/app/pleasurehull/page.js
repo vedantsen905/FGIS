@@ -12,30 +12,26 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
+    <div className="min-h-screen bg-white">
+
       <Navbar />
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-16">
+      {/* <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16"> */}
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
         {/* Hero Section with animated gradient */}
-        <section className="relative overflow-hidden rounded-2xl shadow-2xl">
-          <div className="absolute inset-0 bg-gradient-to-r from-green-600 to-green-800 animate-gradient-x"></div>
-          <div className="relative z-10 py-20 px-6 text-center">
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight animate-fade-in">
-              Pleasure Hull Insurance at a Glance
+        <section className="bg-gray-100 py-8 border-b border-gray-200">
+  <div className="max-w-7xl mx-auto px-4 text-center">
+    <h1 className="text-3xl font-semibold text-gray-900 mb-2">
+              Pleasure Hull Insurance  
             </h1>
-            <div className="max-w-2xl mx-auto">
-              <p className="text-xl text-green-100 opacity-90 animate-fade-in-up">
-                Comprehensive protection for your watercraft with tailored coverage options
-              </p>
+            
             </div>
-          </div>
-          <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-gray-50 to-transparent"></div>
         </section>
 
         {/* What is Pleasure Hull insurance? */}
         <section className="grid md:grid-cols-2 gap-8">
           <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 transform transition-all hover:scale-[1.01] hover:shadow-xl">
-            <h2 className="text-3xl font-bold text-green-700 mb-6">
+            <h2 className="text-3xl font-bold text-[#00AB9D] mb-6">
               What is Pleasure Hull Insurance?
             </h2>
             <div className="space-y-6 text-gray-700 text-lg leading-relaxed">
@@ -46,7 +42,7 @@ export default function Home() {
           </div>
 
           <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 transform transition-all hover:scale-[1.01] hover:shadow-xl">
-            <h2 className="text-3xl font-bold text-green-700 mb-6">
+            <h2 className="text-3xl font-bold text-[#00AB9D] mb-6">
               What you should consider?
             </h2>
             <div className="space-y-6 text-gray-700 text-lg leading-relaxed">
@@ -59,20 +55,20 @@ export default function Home() {
 
         {/* Stats Section with animated counters */}
         <section className="space-y-12">
-          <h2 className="text-3xl font-bold text-green-700 text-center">
+          <h2 className="text-3xl font-bold text-[#00AB9D] text-center">
             Did you know?
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Stat 1 */}
             <div className="bg-white border border-green-100 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group">
-              <div className="text-green-600 text-5xl font-bold mb-4 animate-counter" data-target="1030">
+              <div className="text-[#00AB9D] text-5xl font-bold mb-4 animate-counter" data-target="1030">
                 0
               </div>
               <p className="text-gray-600 mb-4">
                 Boats reported as stolen to police between 2015 and 2019.
               </p>
               <div className="mt-4 px-4 py-2 bg-green-50 rounded-lg inline-block group-hover:bg-green-100 transition-colors">
-                <p className="text-sm font-medium text-green-700">
+                <p className="text-sm font-medium text-[#00AB9D]">
                   (New Zealand stuff.co.nz/national/crime July 2019)
                 </p>
               </div>
@@ -80,14 +76,14 @@ export default function Home() {
 
             {/* Stat 2 */}
             <div className="bg-white border border-green-100 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group">
-              <div className="text-green-600 text-5xl font-bold mb-4">
+              <div className="text-[#00AB9D] text-5xl font-bold mb-4">
                 650K+
               </div>
               <p className="text-gray-600 mb-4">
                 Estimated the total number of boats in New Zealand according to the Marine Industry Association.
               </p>
               <div className="mt-4 px-4 py-2 bg-green-50 rounded-lg inline-block group-hover:bg-green-100 transition-colors">
-                <p className="text-sm font-medium text-green-700 italic">
+                <p className="text-sm font-medium text-[#00AB9D] italic">
                   (New Zealand stuff.co.nz/national/crime July 2019)
                 </p>
               </div>
@@ -95,14 +91,14 @@ export default function Home() {
 
             {/* Stat 3 */}
             <div className="bg-white border border-green-100 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group">
-              <div className="text-green-600 text-5xl font-bold mb-4 animate-counter" data-target="20">
+              <div className="text-[#00AB9D] text-5xl font-bold mb-4 animate-counter" data-target="20">
                 0%
               </div>
               <p className="text-gray-600 mb-4">
                 The recovery rate for stolen boats.
               </p>
               <div className="mt-4 px-4 py-2 bg-green-50 rounded-lg inline-block group-hover:bg-green-100 transition-colors">
-                <p className="text-sm font-medium text-green-700 italic">
+                <p className="text-sm font-medium text-[#00AB9D] italic">
                   (New Zealand stuff.co.nz/national/crime July 2019)
                 </p>
               </div>
@@ -113,7 +109,7 @@ export default function Home() {
         {/* Coverage Types with tabs */}
         <section className="space-y-12">
           <div className="bg-gradient-to-br from-green-50 to-white p-10 rounded-2xl shadow-lg">
-            <h2 className="text-3xl font-bold text-green-700 mb-8 text-center">
+            <h2 className="text-3xl font-bold text-[#00AB9D] mb-8 text-center">
               Types of Pleasure Hull Insurance Covers
             </h2>
             
@@ -121,7 +117,7 @@ export default function Home() {
               {/* Vessels insurance */}
               <div className="bg-white p-6 rounded-xl border border-gray-200 hover:border-green-300 transition-all duration-300 hover:shadow-md group">
                 <div className="bg-green-100 w-12 h-12 rounded-lg flex items-center justify-center mb-4 group-hover:bg-green-200 transition-colors">
-                  <svg className="h-6 w-6 text-green-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className="h-6 w-6 text-[#00AB9D]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                   </svg>
                 </div>
@@ -134,7 +130,7 @@ export default function Home() {
               {/* Ship repairer's liability */}
               <div className="bg-white p-6 rounded-xl border border-gray-200 hover:border-green-300 transition-all duration-300 hover:shadow-md group">
                 <div className="bg-green-100 w-12 h-12 rounded-lg flex items-center justify-center mb-4 group-hover:bg-green-200 transition-colors">
-                  <svg className="h-6 w-6 text-green-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className="h-6 w-6 text-[#00AB9D]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z" />
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z" />
                   </svg>
@@ -148,7 +144,7 @@ export default function Home() {
               {/* Third Party Liability */}
               <div className="bg-white p-6 rounded-xl border border-gray-200 hover:border-green-300 transition-all duration-300 hover:shadow-md group">
                 <div className="bg-green-100 w-12 h-12 rounded-lg flex items-center justify-center mb-4 group-hover:bg-green-200 transition-colors">
-                  <svg className="h-6 w-6 text-green-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className="h-6 w-6 text-[#00AB9D]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                   </svg>
                 </div>
@@ -164,7 +160,7 @@ export default function Home() {
         {/* Coverage Details with interactive tabs */}
         <section className="space-y-12">
           <div className="bg-white p-10 rounded-2xl shadow-lg">
-            <h2 className="text-3xl font-bold text-green-700 mb-8">
+            <h2 className="text-3xl font-bold text-[#00AB9D] mb-8">
               What can it cover?
             </h2>
             <p className="text-gray-700 text-lg mb-8">
@@ -174,7 +170,7 @@ export default function Home() {
             <div className="overflow-x-auto">
               <table className="min-w-full table-auto border-collapse">
                 <thead>
-                  <tr className="bg-green-600 text-white text-left text-lg">
+                  <tr className="bg-[#00AB9D] text-white text-left text-lg">
                     <th className="py-4 px-6 font-semibold">Type of Cover</th>
                     <th className="py-4 px-6 font-semibold">Potential benefits</th>
                   </tr>
@@ -213,7 +209,7 @@ export default function Home() {
                   <tr className="border-b hover:bg-gray-50 transition-colors">
                     <td className="py-4 px-6 font-semibold">Collision</td>
                     <td className="py-4 px-6">
-                      Damage caused due to the collision of the carrying vehicle, vessel, train, airplane.
+                      Damage caused due to the collision of the carrying vehicle, vessel, train, airplane. This covers both a collision between two modes of transport as well as the conveyance colliding with a static object such as a bridge, wall, tree etc. A full cover may also include loss or damage due to goods falling from and within the vehicle.
                     </td>
                   </tr>
                   <tr className="hover:bg-gray-50 transition-colors">
@@ -232,7 +228,7 @@ export default function Home() {
         <section className="grid md:grid-cols-2 gap-8">
           {/* Exclusions with accordion */}
           <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-200">
-            <h2 className="text-3xl font-bold text-green-700 mb-8">
+            <h2 className="text-3xl font-bold text-[#00AB9D] mb-8">
               What is usually not covered?
             </h2>
             <div className="space-y-3">
@@ -268,7 +264,7 @@ export default function Home() {
 
           {/* Case Study with animation */}
           <div className="relative overflow-hidden rounded-2xl shadow-lg">
-            <div className="absolute inset-0 bg-gradient-to-br from-green-600 to-green-800"></div>
+            <div className="absolute inset-0 bg-[#00AB9D]"></div>
             <div className="relative p-8 text-white">
               <h2 className="text-3xl font-bold mb-8">
                 CASE STUDY
@@ -291,16 +287,16 @@ export default function Home() {
         {/* Why Choose FG Insurance with animation */}
         <section className="bg-white p-10 rounded-2xl shadow-lg transform transition-all hover:scale-[1.005]">
           <div className="max-w-5xl mx-auto">
-            <h2 className="text-3xl font-bold text-green-700 mb-8">
+            <h2 className="text-3xl font-bold text-[#00AB9D] mb-8">
               Why choose FG Insurance?
             </h2>
             <p className="text-gray-700 text-lg mb-6">
               At FG Insurance, we offer the clients an option to include several extras to their basic marine insurance. These include, but are not limited to sports equipment, cover against costs associated with an oil spill from the craft, coverage for any other driver or a berth holders liability event.
             </p>
             <div className="mt-8">
-              <button className="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg shadow-md transition-all transform hover:scale-105">
+              {/* <button className="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg shadow-md transition-all transform hover:scale-105">
                 Get a Free Quote
-              </button>
+              </button> */}
             </div>
           </div>
         </section>

@@ -16,11 +16,11 @@ const Terms = () => {
               
               <div className="prose prose-lg text-gray-600 max-w-none">
                 <p className="mb-6">
-                  By accessing the FG Insurance Services Website/s ("Website"), you agree to be bound by the terms and conditions set out below. The domain name for the Website is owned by FGIS Limited. The Website/s, content and information available through the Website/s are owned and operated by FG Insurance Services.
+                  By accessing the FG Insurance Services Website/s (Website&quot;), you agree to be bound by the terms and conditions set out below. The domain name for the Website is owned by FGIS Limited. The Website/s, content and information available through the Website/s are owned and operated by FG Insurance Services.
                 </p>
 
                 <p className="mb-6">
-                  FGIS has taken all reasonable care to ensure the accuracy of the information available on or through the Website. However, it is of a general nature and does not take into account any individual's particular circumstances. FG Insurance Services makes no warranty, express or implied for accuracy, correctness, completeness or use of information that is available on or through the Website.
+                  FGIS has taken all reasonable care to ensure the accuracy of the information available on or through the Website. However, it is of a general nature and does not take into account any individual&apos;s particular circumstances. FG Insurance Services makes no warranty, express or implied for accuracy, correctness, completeness or use of information that is available on or through the Website.
                 </p>
 
                 <p className="mb-6">

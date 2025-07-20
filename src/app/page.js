@@ -181,7 +181,7 @@ export default function Home() {
           
           <div className="w-full lg:w-1/2 space-y-6">
             <motion.h2 
-              className="text-3xl md:text-4xl font-bold leading-snug bg-gradient-to-r from-emerald-500 to-emerald-700 bg-clip-text text-transparent"
+              className="text-3xl md:text-4xl font-bold leading-snug bg-gradient-to-r from-[#00AB9D] to-[#008fa0] bg-clip-text text-transparent"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
@@ -227,63 +227,72 @@ export default function Home() {
 
         {/* Bottom Content */}
         <div className="flex flex-col lg:flex-row-reverse gap-12 lg:gap-16 items-center">
-          <div className="w-full lg:w-1/2 grid grid-cols-2 gap-4">
-            {['team.png', 'family1.png', 'family2.png', 'car.png'].map((img, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: idx * 0.1 }}
-                viewport={{ once: true, margin: "-50px" }}
-                className="relative rounded-xl overflow-hidden aspect-square shadow-lg hover:shadow-xl transition-shadow"
-              >
-                <Image
-                  src={`/${img}`}
-                  alt={`Image ${idx + 1}`}
-                  fill
-                  className="object-cover w-full h-full hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"></div>
-              </motion.div>
-            ))}
-          </div>
-          
-          <div className="w-full lg:w-1/2 space-y-6">
-            <motion.h3 
-              className="text-3xl md:text-4xl font-bold leading-snug bg-gradient-to-r from-emerald-500 to-emerald-700 bg-clip-text text-transparent"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              viewport={{ once: true }}
-            >
-              Step out with confidence – we've got you covered!
-            </motion.h3>
-            <div className="space-y-4 text-gray-700 leading-relaxed">
-              <motion.p
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ delay: 0.3 }}
-                viewport={{ once: true }}
-              >
-                Kia ora everyone, hope you're all doing well! It was a wild ride navigating the
-                post-pandemic era, but we at FG want to assure you that we're still here for you
-                every step of the way.
-              </motion.p>
-              <motion.p
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ delay: 0.4 }}
-                viewport={{ once: true }}
-              >
-                As an insurance broker, our top priority has always been to make sure you're
-                protected, and that hasn't changed one bit. We know that these past couple of
-                years have been tough, which is why we're committed to providing you with expert
-                advice, personalized service, and the peace of mind that comes with knowing
-                you're covered.
-              </motion.p>
-            </div>
-          </div>
-        </div>
+  {/* Single Image instead of grid */}
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.5 }}
+    viewport={{ once: true, margin: "-50px" }}
+    className="relative rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow w-full lg:w-1/2 aspect-video"
+  >
+    <Image
+      src="/family1.png" // <-- Choose your desired single image here
+      alt="Confidence image"
+      fill
+      className="object-cover w-full h-full hover:scale-105 transition-transform duration-500"
+    />
+    <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"></div>
+  </motion.div>
+
+  {/* Text Section */}
+  <div className="w-full lg:w-1/2 space-y-6">
+    <motion.h3 
+      className="text-3xl md:text-4xl font-bold leading-snug bg-gradient-to-r from-[#00AB9D] to-[#008fa0] bg-clip-text text-transparent"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.2 }}
+      viewport={{ once: true }}
+    >
+      Step out with confidence – we've got you covered!
+    </motion.h3>
+
+    <div className="space-y-4 text-gray-700 leading-relaxed">
+      <motion.p
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ delay: 0.3 }}
+        viewport={{ once: true }}
+      >
+        Kia ora everyone, hope you're all doing well! It was a wild ride navigating the
+        post-pandemic era, but we at FG want to assure you that we're still here for you
+        every step of the way.
+      </motion.p>
+
+      <motion.p
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ delay: 0.4 }}
+        viewport={{ once: true }}
+      >
+        As an insurance broker, our top priority has always been to make sure you're
+        protected, and that hasn't changed one bit. We know that these past couple of
+        years have been tough, which is why we're committed to providing you with expert
+        advice, personalized service, and the peace of mind that comes with knowing
+        you're covered.
+      </motion.p>
+
+      <motion.p
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ delay: 0.5 }}
+        viewport={{ once: true }}
+      >
+ If you've got any questions don't hesitate to reach out - we're always here to help. And if you have made the decision in choosing us as your insurance broker, we would like to say thank you and stay safe out there!
+      </motion.p>
+    </div>
+  </div>
+</div>
+
       </section>
 
       {/* Authorised Bodies Section */}
@@ -303,7 +312,7 @@ export default function Home() {
             viewport={{ once: true, margin: "-100px" }}
             className="lg:w-1/2 space-y-6"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
+            <h2 className="text-3xl md:text-4xl font-bold text-[#00AB9D]">
               Discover our authorised bodies! 
             </h2>
             <p className="text-gray-700 text-lg leading-relaxed">

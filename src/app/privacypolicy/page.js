@@ -8,12 +8,11 @@ export default function PrivacyPolicy() {
   return (
   <div className="min-h-screen flex flex-col bg-white text-[#202020] font-sans">
   {/* Fixed Navbar */}
-  <div className="sticky top-0 z-50 bg-white shadow-sm">
+   
     <Navbar />
-  </div>
-
+  
   {/* Main Content with proper spacing below navbar */}
-  <main className="flex-grow pt-30 pb-12 px-4 md:px-16"> {/* Increased pt-4 to pt-20 */}
+  <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-16"> {/* Increased pt-4 to pt-20 */}
     <div className="max-w-4xl mx-auto">
       {/* Header Section */}
       <div className="mb-8">

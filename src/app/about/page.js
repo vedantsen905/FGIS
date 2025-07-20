@@ -20,7 +20,7 @@ export default function Home() {
       <main className="flex-grow container mx-auto px-4 py-8 md:py-12 space-y-16 md:space-y-20 mt-0">
         {/* Section 1 */}
         <section className="max-w-4xl mx-auto">
-          <h2 className="text-green-600 text-2xl md:text-3xl font-semibold mb-6">
+          <h2 className="text-[#00AB9D] text-2xl md:text-3xl font-semibold mb-6">
             Insure. Business. Confidence.
           </h2>
           <div className="space-y-4 text-base md:text-lg leading-relaxed">
@@ -37,7 +37,7 @@ export default function Home() {
 
         {/* Section 2 */}
         <section className="max-w-4xl mx-auto">
-          <h2 className="text-green-600 text-2xl md:text-3xl font-semibold mb-6">
+          <h2 className="text-[#00AB9D] text-2xl md:text-3xl font-semibold mb-6">
             Customized Solutions
           </h2>
           <div className="space-y-4 text-base md:text-lg leading-relaxed">
@@ -55,7 +55,7 @@ export default function Home() {
 
         {/* Section 3 */}
         <section className="max-w-4xl mx-auto">
-          <h2 className="text-green-600 text-2xl md:text-3xl font-semibold mb-6">
+          <h2 className="text-[#00AB9D] text-2xl md:text-3xl font-semibold mb-6">
             Expert Support
           </h2>
           <div className="space-y-4 text-base md:text-lg leading-relaxed">
@@ -70,8 +70,10 @@ export default function Home() {
         </section>
       </main>
 
+
       {/* Footer */}
       <Footer />
     </div>
   );
 }
+

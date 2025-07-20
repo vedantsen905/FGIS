@@ -6,28 +6,25 @@ import Footer from '../components/Footer';
 
 export default function TermsPage() {
   return (
-    <div className="min-h-screen bg-gray-50 font-sans">
+    <div className="min-h-screen flex flex-col bg-gray-50 text-gray-800">
       <Navbar />
       
-      <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 pt-28">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
         {/* Header */}
-        <div className="flex justify-between items-center border-b border-green-200 pb-6 mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-green-700">Terms of Business</h1>
-          <button 
-            className="text-gray-400 hover:text-green-700 transition p-2 -mr-2"
-            aria-label="Close"
-          >
-            <FiX size={28} />
-          </button>
+        <div className="container mx-auto px-4">
+        <h1 className="text-2xl md:text-3xl font-bold text-center">Terms of Business</h1>
+           
+           
+          
         </div>
 
         {/* Content Sections */}
         <div className="bg-white rounded-xl shadow-sm p-6 md:p-8 mb-10">
           {/* Agreement Section */}
           <section className="mb-10">
-            <h2 className="text-xl md:text-2xl font-bold text-green-700 mb-4">1. Agreement</h2>
+            <h2 className="text-xl md:text-2xl font-bold text-[#00AB9D] mb-4">1. Agreement</h2>
             <ol className="list-decimal space-y-4 pl-6">
-              <li className="text-gray-700 leading-relaxed">You have appointed <span className="font-semibold text-green-700">FG Insurance Services</span> ("we, us") as your broker in accordance with the terms of this agreement. By allowing us to continue to act as your broker, you agree to be bound by the terms of this agreement.</li>
+              <li className="text-gray-700 leading-relaxed">You have appointed <span className="font-semibold text-">FG Insurance Services</span> ("we, us") as your broker in accordance with the terms of this agreement. By allowing us to continue to act as your broker, you agree to be bound by the terms of this agreement.</li>
               <li className="text-gray-700 leading-relaxed">This agreement sets out the terms and conditions ("the terms") on which we will provide all services to you, unless we agree otherwise, in writing.</li>
               <li className="text-gray-700 leading-relaxed">As your insurance broker, we act as your representative in arranging insurance on your behalf. In addition, if requested, we may make recommendations and provide you with our opinion regarding potential insurers based on your requirements. However, the final selection of insurer and the insurance product will remain your choice and responsibility.</li>
               <li className="text-gray-700 leading-relaxed">These terms apply until they are varied, by agreement, in writing between us, or until our appointment is cancelled. We may vary the services we provide you from time to time, on providing notice to you.</li>
@@ -38,7 +35,7 @@ export default function TermsPage() {
 
           {/* Services Section */}
           <section className="mb-10">
-            <h2 className="text-xl md:text-2xl font-bold text-green-700 mb-4">2. Services</h2>
+            <h2 className="text-xl md:text-2xl text-[#00AB9D] font-bold mb-4">2. Services</h2>
             <ol className="list-decimal space-y-4 pl-6">
               <li className="text-gray-700 leading-relaxed">We are members of:
                 <ol className="list-decimal space-y-2 pl-6 mt-2">
@@ -59,7 +56,7 @@ export default function TermsPage() {
 
           {/* Remuneration Section */}
           <section className="mb-10">
-            <h2 className="text-xl md:text-2xl font-bold text-green-700 mb-4">3. Remuneration</h2>
+            <h2 className="text-xl md:text-2xl text-[#00AB9D]  font-bold text- mb-4">3. Remuneration</h2>
             <ol className="list-decimal space-y-4 pl-6">
               <li className="text-gray-700 leading-relaxed">We will be remunerated by way of commission received from the insurer we place your policy with (this includes renewals and some variations). We may also charge you a fee for implementing any advice we provide</li>
               <li className="text-gray-700 leading-relaxed">The commission we receive is a percentage of the premium payable by you (excluding government charges, levies and taxes). Some insurers may pay us more than others. The rate of commission can vary according to the type of insurance and cover provided and the way the transaction is arranged.</li>
@@ -75,7 +72,7 @@ export default function TermsPage() {
 
           {/* Your Responsibilities Section */}
           <section className="mb-10">
-            <h2 className="text-xl md:text-2xl font-bold text-green-700 mb-4">4. Your Responsibilities</h2>
+            <h2 className="text-xl md:text-2xl text-[#00AB9D]  font-bold text- mb-4">4. Your Responsibilities</h2>
             <ol className="list-decimal space-y-4 pl-6">
               <li className="text-gray-700 leading-relaxed">In respect of the services we provide under this agreement, you are responsible as follows:
                 <ol className="list-decimal space-y-2 pl-6 mt-2">
@@ -95,7 +92,7 @@ export default function TermsPage() {
 
           {/* Conflicts of Interest Section */}
           <section className="mb-10">
-            <h2 className="text-xl md:text-2xl font-bold text-green-700 mb-4">5. Conflicts of Interest</h2>
+            <h2 className="text-xl md:text-2xl text-[#00AB9D]  font-bold text- mb-4">5. Conflicts of Interest</h2>
             <ol className="list-decimal space-y-4 pl-6">
               <li className="text-gray-700 leading-relaxed">Should a situation arise where a potential conflict of interest could arise, either between ourselves, one of our clients, or one of our service or product providers and the services we provide to you, we will contact you and work together with you to find a suitable solution.</li>
               <li className="text-gray-700 leading-relaxed">We are a member of Steadfast. Steadfast has arrangements with insurers and premium funders, under which Steadfast receives a professional services fee for each insurance policy arranged by us with those insurers or funded through premium funders. These payments are used to operate Steadfast. We may receive a proportion of this professional services fee at the end of each financial year</li>
@@ -104,7 +101,7 @@ export default function TermsPage() {
 
           {/* Your Information Section */}
           <section className="mb-10">
-            <h2 className="text-xl md:text-2xl font-bold text-green-700 mb-4">6. Your Information</h2>
+            <h2 className="text-xl md:text-2xl text-[#00AB9D]  font-bold text- mb-4">6. Your Information</h2>
             <ol className="list-decimal space-y-4 pl-6">
               <li className="text-gray-700 leading-relaxed">We will hold any personal information that you provide to us in accordance with the Privacy Act 2020. Any such information that we request from you will be used pursuant to the provision of the services.</li>
               <li className="text-gray-700 leading-relaxed">It may be necessary for us to pass your information on to insurers and other product or service providers which may provide us with additional support in connection with our provision of the services.</li>
@@ -116,7 +113,7 @@ export default function TermsPage() {
 
           {/* Electronic Communications Section */}
           <section className="mb-10">
-            <h2 className="text-xl md:text-2xl font-bold text-green-700 mb-4">7. Electronic Communications</h2>
+            <h2 className="text-xl md:text-2xl font-bold text-[#00AB9D]  text- mb-4">7. Electronic Communications</h2>
             <ol className="list-decimal space-y-4 pl-6">
               <li className="text-gray-700 leading-relaxed">We may correspond with you by electronic means unless you instruct us not to. We are not response for any risks associated with electronic communication, including loss of data.</li>
             </ol>
@@ -124,7 +121,7 @@ export default function TermsPage() {
 
           {/* Complaints and Disputes Section */}
           <section className="mb-10">
-            <h2 className="text-xl md:text-2xl font-bold text-green-700 mb-4">8. Complaints and Disputes</h2>
+            <h2 className="text-xl md:text-2xl text-[#00AB9D]  font-bold text- mb-4">8. Complaints and Disputes</h2>
             <ol className="list-decimal space-y-4 pl-6">
               <li className="text-gray-700 leading-relaxed">As a financial advice provider, we are required to have an internal dispute resolution scheme. We are also a member of Financial Services Complaints Ltd, an independent dispute resolution service. This is a requirement of our licence as a financial advice provider.</li>
               <li className="text-gray-700 leading-relaxed">Our Disputes Process is explained in full on our web site at www.fgis.co.nz. If you do not have access to the internet please ask us and we will provide you with a hard copy of our complaints policy.</li>
@@ -133,7 +130,7 @@ export default function TermsPage() {
 
           {/* Termination Section */}
           <section className="mb-10">
-            <h2 className="text-xl md:text-2xl font-bold text-green-700 mb-4">9. Termination</h2>
+            <h2 className="text-xl md:text-2xl text-[#00AB9D]  font-bold text- mb-4">9. Termination</h2>
             <ol className="list-decimal space-y-4 pl-6">
               <li className="text-gray-700 leading-relaxed">Either party can terminate this agreement by providing the other party one month's written notice of termination. Upon such termination notice being issued or received by us, at the end of the notice period we will cease providing you services and will:
                 <ol className="list-decimal space-y-2 pl-6 mt-2">
@@ -158,7 +155,7 @@ export default function TermsPage() {
 
           {/* Jurisdiction Section */}
           <section>
-            <h2 className="text-xl md:text-2xl font-bold text-green-700 mb-4">10. Jurisdiction</h2>
+            <h2 className="text-xl md:text-2xl font-bold text-[#00AB9D]  text- mb-4">10. Jurisdiction</h2>
             <ol className="list-decimal space-y-4 pl-6">
               <li className="text-gray-700 leading-relaxed">This Agreement is governed by New Zealand law and the New Zealand courts have exclusive jurisdiction.</li>
               <li className="text-gray-700 leading-relaxed">If you have any queries about our services please contact us on compliance@fgis.co.nz or 0800344700.</li>

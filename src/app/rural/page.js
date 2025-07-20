@@ -22,19 +22,19 @@ const tabContent = {
     links: [
       {
         name: 'Home & Content',
-        href: '/insurance/home-content',
+        href: '/home&content',
         desc: 'Covers damage to your home and personal belongings from a range of risks, ensuring your property and possessions are protected.',
-        icon: '🏠',
+        icon: '🏠',   
       },
       {
         name: 'Private Motor',
-        href: '/insurance/private-motor',
+      href: '/PrivateVehicle',
         desc: 'Provides protection for your personal vehicle against damage, theft, and liability.',
         icon: '🚗',
       },
       {
         name: 'Private Hull',
-        href: '/insurance/private-hull',
+        href: '/pleasurehull',
         desc: 'Gives you peace of mind to know you would be able to repair or replace your belongings.',
         icon: '🛥️',
       },
@@ -56,13 +56,13 @@ const tabContent = {
     links: [
       {
         name: 'Body Corporates',
-        href: '/insurance/body-corporates',
+        href: '/bodycorporate',
         desc: 'Protects what is likely your most expensive asset.',
         icon: '🏘️',
       },
       {
         name: 'Industrial Property',
-        href: '/insurance/industrial-property',
+        href: '/industrialproperty',
         desc: 'Protects what is likely your most expensive asset.',
         icon: '🏭',
       },
@@ -79,20 +79,20 @@ const tabContent = {
     links: [
       {
         name: 'Business Interruption',
-        href: '/insurance/commercial-property',
+        href: '/businessinterruption',
         desc:  "Covers loss of income due to unexpected disruptions in your business operations.",
         icon: '🏢',
       },
       {
         name: 'Heavy/Fleet Motor',
-        href: '/insurance/public-liability',
+        href: '/heavyfleetmotor',
         desc: "Covers your fleet or heavy vehicles, protecting against various risks.",
         icon: '🚛',
         
       },
       {
         name: 'Corporate Travel',
-        href: '/insurance/cyber-insurance',
+        href: '/corporatetravel',
         desc:  "Provides protection for your business trips, covering risks associated with travel abroad.",
         icon: '🔐',
 
@@ -100,34 +100,34 @@ const tabContent = {
 
       {
         name: 'General Liability',
-        href: '/insurance/general-liability',
+        href: '/generalliability',
       desc:"Covers legal and financial liability for injury or damage caused by your business operations.",
         icon: '⚖️',
       },
       {
         name: 'Professional Indemnity',
-        href: '/insurance/public-liability',
+        href: '/professionalindemnity',
         desc: "Shields you from claims arising from professional mistakes or negligence.",
         icon: '🛡️',
       },
 
       {
         name : "Management Liability",
-        href: '/insurance/management-liability',
+        href: '/managementliability',
         desc: "Protects directors and officers from claims related to their managerial decisions and actions.",
         icon: '👔',
       }
       ,
       {
         name:"Cyber Liability",
-        href: '/insurance/cyber-insurance',
+        href: '/cyberliablility',
         desc:"Safeguards your business against losses from cyberattacks and data breaches",
         icon: '💻',
       },
 
       {
         name:"Material Damage",
-        href : "",
+        href : '/materialdamage',
         desc:"Provides coverage for physical damage to your property or assets due to unforeseen events.",
         icon: '🏗️',
       }
@@ -140,125 +140,114 @@ export default function InsuranceTabs() {
   const [activeTab, setActiveTab] = useState('Personal Insurance');
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50">
+    <div className="min-h-screen bg-white flex flex-col">
       <Navbar />
-      
-      <main className="flex-grow">
-        <br></br>
- <br></br>
-        {/* Hero Section */}
-        <div className="bg-gradient-to-r from-teal-600 to-teal-500 text-white py-16 px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl font-bold mb-4">Our Insurance Products</h1>
-            <p className="text-xl opacity-90">
-              Comprehensive protection tailored to your unique needs
-            </p>
+      <main className="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
+        {/* Hero Section - now light and simple */}
+        <section className="bg-gray-100 py-8 border-b border-gray-200">
+          <div className="max-w-7xl mx-auto px-4 text-center">
+            <h1 className="text-3xl font-semibold text-gray-900 mb-2">Our Insurance Products</h1>
+            <p className="text-xl text-gray-700 opacity-90">Comprehensive protection tailored to your unique needs</p>
           </div>
-        </div>
-
+        </section>
         {/* Main Content */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="flex flex-col lg:flex-row gap-8">
-            {/* Sidebar Navigation */}
-            <div className="lg:w-64">
-              <div className="sticky top-24 space-y-2">
-                {tabs.map((tab) => (
-                  <button
-                    key={tab.name}
-                    onClick={() => setActiveTab(tab.name)}
-                    className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 ${
-                      activeTab === tab.name
-                        ? 'bg-white shadow-md text-teal-600 font-semibold'
-                        : 'text-gray-700 hover:bg-gray-100'
-                    }`}
-                  >
-                    <span className="text-xl">{tab.icon}</span>
-                    <span>{tab.name}</span>
-                  </button>
-                ))}
-              </div>
+        <section className="flex flex-col lg:flex-row gap-8">
+          {/* Sidebar Navigation */}
+          <div className="lg:w-64">
+            <div className="sticky top-24 space-y-2">
+              {tabs.map((tab) => (
+                <button
+                  key={tab.name}
+                  onClick={() => setActiveTab(tab.name)}
+                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 border border-gray-200 shadow-sm hover:shadow-md hover:border-[#00bfa5] ${
+                    activeTab === tab.name
+                      ? 'bg-white text-[#00bfa5] font-semibold border-[#00bfa5] shadow-md'
+                      : 'text-gray-700 bg-gray-50'
+                  }`}
+                >
+                  <span className="text-xl">{tab.icon}</span>
+                  <span>{tab.name}</span>
+                </button>
+              ))}
             </div>
-
-            {/* Content Panel */}
-            <div className="flex-1 bg-white rounded-xl shadow-md overflow-hidden">
-              <div className="p-6 md:p-8">
-                {/* Header */}
-                <div className="mb-8">
-                  <span className="inline-block bg-teal-100 text-teal-800 text-sm font-medium px-3 py-1 rounded-full mb-3">
-                    {tabContent[activeTab].title}
-                  </span>
-                  <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
-                    {tabContent[activeTab].heading}
-                  </h2>
-                  <div className="prose max-w-none text-gray-600 whitespace-pre-line">
-                    {tabContent[activeTab].description}
-                  </div>
+          </div>
+          {/* Content Panel */}
+          <div className="flex-1 bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+            <div className="p-6 md:p-8">
+              {/* Header */}
+              <div className="mb-8">
+                <span className="inline-block bg-[#00bfa5] text-white text-sm font-medium px-3 py-1 rounded-full mb-3">
+                  {tabContent[activeTab].title}
+                </span>
+                <h2 className="text-2xl md:text-3xl font-bold text-[#00bfa5] mb-4">
+                  {tabContent[activeTab].heading}
+                </h2>
+                <div className="prose max-w-none text-gray-700 whitespace-pre-line">
+                  {tabContent[activeTab].description}
                 </div>
-
-                {/* Links Grid */}
-                {tabContent[activeTab].links.length > 0 && (
-                  <div className="mb-10">
-                    <h3 className="text-xl font-semibold text-gray-800 mb-6">
-                      Available Coverages
-                    </h3>
-                    <div className="grid md:grid-cols-2 gap-6">
-                      {tabContent[activeTab].links.map((link) => (
-                        <Link
-                          key={link.name}
-                          href={link.href}
-                          className="group block border border-gray-200 rounded-lg p-5 hover:border-teal-300 transition-all duration-200 hover:shadow-sm"
-                        >
-                          <div className="flex items-start gap-4">
-                            <span className="text-2xl mt-1">{link.icon}</span>
-                            <div>
-                              <h4 className="text-lg font-semibold text-teal-600 group-hover:text-teal-800 mb-2">
-                                {link.name}
-                              </h4>
-                              <p className="text-gray-600">{link.desc}</p>
-                              <div className="mt-3 text-teal-500 font-medium flex items-center group-hover:text-teal-700">
-                                Learn more
-                                <svg
-                                  className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1"
-                                  fill="none"
-                                  stroke="currentColor"
-                                  viewBox="0 0 24 24"
-                                  xmlns="http://www.w3.org/2000/svg"
-                                >
-                                  <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth={2}
-                                    d="M9 5l7 7-7 7"
-                                  />
-                                </svg>
-                              </div>
+              </div>
+              {/* Links Grid */}
+              {tabContent[activeTab].links.length > 0 && (
+                <div className="mb-10">
+                  <h3 className="text-xl font-semibold text-gray-900 mb-6">
+                    Available Coverages
+                  </h3>
+                  <div className="grid md:grid-cols-2 gap-6">
+                    {tabContent[activeTab].links.map((link) => (
+                      <Link
+                        key={link.name}
+                        href={link.href}
+                        className="group block border border-gray-200 rounded-xl p-5 bg-white hover:border-[#00bfa5] transition-all duration-200 hover:shadow-md shadow-sm"
+                      >
+                        <div className="flex items-start gap-4">
+                          <span className="text-2xl mt-1 text-[#00bfa5]">{link.icon}</span>
+                          <div>
+                            <h4 className="text-lg font-semibold text-[#00bfa5] group-hover:text-gray-900 mb-2">
+                              {link.name}
+                            </h4>
+                            <p className="text-gray-700">{link.desc}</p>
+                            <div className="mt-3 text-[#00bfa5] font-medium flex items-center group-hover:text-gray-900">
+                              Learn more
+                              <svg
+                                className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth={2}
+                                  d="M9 5l7 7-7 7"
+                                />
+                              </svg>
                             </div>
                           </div>
-                        </Link>
-                      ))}
-                    </div>
+                        </div>
+                      </Link>
+                    ))}
                   </div>
-                )}
-
-                {/* Image */}
-                {tabContent[activeTab].image && (
-                  <div className="mt-8">
-                    <div className="relative rounded-lg overflow-hidden aspect-video bg-gray-100">
-                      <Image
-                        src={tabContent[activeTab].image}
-                        alt={tabContent[activeTab].title}
-                        className="absolute inset-0 w-full h-full object-cover"
-                        loading="lazy"
-                      />
-                    </div>
+                </div>
+              )}
+              {/* Image */}
+              {tabContent[activeTab].image && (
+                <div className="mt-8">
+                  <div className="relative rounded-xl overflow-hidden aspect-video bg-gray-100 border border-gray-200 shadow">
+                    <Image
+                      src={tabContent[activeTab].image}
+                      alt={tabContent[activeTab].title}
+                      className="absolute inset-0 w-full h-full object-cover"
+                      fill
+                      loading="lazy"
+                    />
                   </div>
-                )}
-              </div>
+                </div>
+              )}
             </div>
           </div>
-        </div>
+        </section>
       </main>
-
       <Footer />
     </div>
   );
