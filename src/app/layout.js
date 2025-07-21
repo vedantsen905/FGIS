@@ -28,7 +28,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <head>
         {/* Favicon (will be shown in browser tab) */}
-        <link rel="icon" href="/logo.png" />
+        <link rel="icon" href="/public/favicon.png" />
 
         {/* Title (text shown beside favicon in tab) */}
         <title>FGIS - FG Life Insurance</title>
